@@ -2,6 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createLegalDocument, deleteLegalDocument } from "@/app/actions";
 
+type LegalDocumentModel = {
+  id: number;
+  title: string;
+  image: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Legal Documents | Admin",
 };
@@ -46,7 +53,7 @@ export default async function LegalDocumentsPage() {
             </h2>
             {documents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {documents.map((doc: any) => (
+                {documents.map((doc: LegalDocumentModel) => (
                   <div
                     key={doc.id}
                     className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"

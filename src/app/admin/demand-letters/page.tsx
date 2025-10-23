@@ -2,6 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createDemandLetter, deleteDemandLetter } from "@/app/actions";
 
+type DemandLetterModel = {
+  id: number;
+  title: string;
+  image: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Demand Letters | Admin",
 };
@@ -46,7 +53,7 @@ export default async function DemandLettersPage() {
             </h2>
             {demands.length > 0 ? (
               <div className="space-y-3">
-                {demands.map((demand: any) => (
+                {demands.map((demand: DemandLetterModel) => (
                   <div
                     key={demand.id}
                     className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"

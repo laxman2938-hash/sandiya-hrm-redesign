@@ -2,6 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createClient, deleteClient } from "@/app/actions";
 
+type ClientModel = {
+  id: number;
+  name: string;
+  logo: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Clients | Admin",
 };
@@ -46,7 +53,7 @@ export default async function ClientsPage() {
             </h2>
             {clients.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {clients.map((client: any) => (
+                {clients.map((client: ClientModel) => (
                   <div
                     key={client.id}
                     className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-center"

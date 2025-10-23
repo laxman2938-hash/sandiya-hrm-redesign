@@ -1,6 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import { updateContactMessageStatus, deleteContactMessage } from "@/app/actions";
 
+type ContactMessageModel = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  status: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Contact Messages | Admin",
 };
@@ -44,7 +55,7 @@ export default async function MessagesPage() {
                 </tr>
               </thead>
               <tbody>
-                {messages.map((msg: any) => (
+                {messages.map((msg: ContactMessageModel) => (
                   <tr
                     key={msg.id}
                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors"

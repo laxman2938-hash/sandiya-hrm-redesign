@@ -2,6 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createAchievement, deleteAchievement } from "@/app/actions";
 
+type AchievementModel = {
+  id: number;
+  title: string;
+  image: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Achievements | Admin",
 };
@@ -46,7 +53,7 @@ export default async function AchievementsPage() {
             </h2>
             {achievements.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {achievements.map((achievement: any) => (
+                {achievements.map((achievement: AchievementModel) => (
                   <div
                     key={achievement.id}
                     className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"

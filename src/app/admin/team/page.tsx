@@ -2,6 +2,14 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createTeamMember, deleteTeamMember } from "@/app/actions";
 
+type TeamMemberModel = {
+  id: number;
+  name: string;
+  designation: string | null;
+  image: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Team Management | Admin",
 };
@@ -53,7 +61,7 @@ export default async function TeamPage() {
             </h2>
             {teamMembers.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {teamMembers.map((member: any) => (
+                {teamMembers.map((member: TeamMemberModel) => (
                   <div
                     key={member.id}
                     className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"

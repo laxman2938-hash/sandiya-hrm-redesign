@@ -2,6 +2,15 @@ import { prisma } from "@/lib/prisma";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { createTestimonial, deleteTestimonial } from "@/app/actions";
 
+type TestimonialModel = {
+  id: number;
+  name: string;
+  company: string | null;
+  quote: string;
+  image: string | null;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Testimonials | Admin",
 };
@@ -54,7 +63,7 @@ export default async function TestimonialsPage() {
             </h2>
             {testimonials.length > 0 ? (
               <div className="space-y-4">
-                {testimonials.map((testimonial: any) => (
+                {testimonials.map((testimonial: TestimonialModel) => (
                   <div
                     key={testimonial.id}
                     className="border-l-4 border-blue-500 bg-gray-50 p-4 rounded hover:shadow-md transition-shadow"

@@ -3,12 +3,21 @@ import { AdminForm } from "@/components/admin/AdminForm";
 import { DataTable } from "@/components/admin/DataTable";
 import { createGalleryImage, deleteGalleryImage } from "@/app/actions";
 
+// Minimal type to satisfy TS during build without relying on Prisma type generation path
+type GalleryImageModel = {
+  id: number;
+  title: string;
+  image: string;
+  createdAt: string | Date;
+};
+
 export const metadata = {
   title: "Gallery Management | Admin",
 };
 
+
 export default async function GalleryPage() {
-  const galleryImages = await prisma.galleryImage.findMany({
+  const galleryImages: GalleryImageModel[] = await prisma.galleryImage.findMany({
     orderBy: { createdAt: "desc" },
   });
 
@@ -68,7 +77,7 @@ export default async function GalleryPage() {
             </h2>
             {galleryImages.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {galleryImages.map((image: any) => (
+                {galleryImages.map((image: GalleryImageModel) => (
                   <div
                     key={image.id}
                     className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
