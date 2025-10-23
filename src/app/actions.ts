@@ -29,11 +29,6 @@ const teamMemberSchema = z.object({
   image: z.string().min(1, "Image is required."),
 });
 
-const employmentCategorySchema = z.object({
-  title: z.string().min(2, "Title must be at least 2 characters."),
-  image: z.string().min(1, "Image is required."),
-});
-
 const legalDocumentSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters."),
   image: z.string().min(1, "Image is required."),
@@ -110,15 +105,16 @@ function handleError(error: unknown, defaultMessage: string = "Database error.")
 }
 
 /**
- * Helper function to convert file to base64
+ * Helper function to convert file to base64 (server-side compatible)
  */
 async function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-  });
+  const buffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return `data:${file.type};base64,${Buffer.from(binary, 'binary').toString('base64')}`;
 }
 
 /**
@@ -468,142 +464,6 @@ export async function deleteTeamMember(id: number): Promise<FormState> {
     return {
       success: false,
       message: handleError(error, "Failed to delete team member."),
-    };
-  }
-}
-
-// ============================================================================
-// ADMIN ACTIONS - EMPLOYMENT CATEGORIES
-// ============================================================================
-
-/**
- * Create a new employment category
- * @requires Authentication
- */
-export async function createEmploymentCategory(
-  prevState: FormState,
-  formData: FormData
-): Promise<FormState> {
-  // TODO: Add authentication check
-
-  try {
-    const file = await getFileFromFormData(formData, "image");
-    let imageData = "";
-
-    if (file) {
-      imageData = await fileToBase64(file);
-    } else {
-      return {
-        success: false,
-        message: "Image file is required.",
-      };
-    }
-
-    const validation = validateFormData(employmentCategorySchema, {
-      title: formData.get("title"),
-      image: imageData,
-    });
-
-    if (!validation.success) {
-      return {
-        success: false,
-        message: "Validation failed.",
-        errors: validation.errors,
-      };
-    }
-
-    const record = await prisma.employmentCategory.create({
-      data: validation.data,
-    });
-
-    revalidatePath("/employment-categories");
-
-    return {
-      success: true,
-      message: "Employment category created successfully.",
-      data: record,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: handleError(error, "Failed to create employment category."),
-    };
-  }
-}
-
-/**
- * Update an employment category
- * @requires Authentication
- */
-export async function updateEmploymentCategory(
-  id: number,
-  prevState: FormState,
-  formData: FormData
-): Promise<FormState> {
-  // TODO: Add authentication check
-
-  try {
-    const file = await getFileFromFormData(formData, "image");
-    let updateData: Record<string, any> = {
-      title: formData.get("title"),
-    };
-
-    if (file) {
-      updateData.image = await fileToBase64(file);
-    }
-
-    const validation = validateFormData(employmentCategorySchema, updateData);
-
-    if (!validation.success) {
-      return {
-        success: false,
-        message: "Validation failed.",
-        errors: validation.errors,
-      };
-    }
-
-    const record = await prisma.employmentCategory.update({
-      where: { id },
-      data: validation.data,
-    });
-
-    revalidatePath("/employment-categories");
-
-    return {
-      success: true,
-      message: "Employment category updated successfully.",
-      data: record,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: handleError(error, "Failed to update employment category."),
-    };
-  }
-}
-
-/**
- * Delete an employment category
- * @requires Authentication
- */
-export async function deleteEmploymentCategory(id: number): Promise<FormState> {
-  // TODO: Add authentication check
-
-  try {
-    await prisma.employmentCategory.delete({
-      where: { id },
-    });
-
-    revalidatePath("/employment-categories");
-
-    return {
-      success: true,
-      message: "Employment category deleted successfully.",
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: handleError(error, "Failed to delete employment category."),
     };
   }
 }
