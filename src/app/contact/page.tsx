@@ -1,13 +1,10 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { api } from '@/lib/api';
 import { ContactMessage } from '@/types';
 
 export default function ContactPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [formData, setFormData] = useState<Omit<ContactMessage, 'id'>>({
     name: '',
     email: '',

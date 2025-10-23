@@ -1,14 +1,11 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { GalleryImage } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 
 export default function GalleryPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +18,7 @@ export default function GalleryPage() {
         const response: any = await api.getGallery();
         setImages(Array.isArray(response) ? response : response.data?.results || response.data || []);
       } catch (err) {
-        setError(t('common.error'));
+        setError('Error loading gallery. Please try again.');
         console.error('Error fetching gallery:', err);
       } finally {
         setLoading(false);
@@ -29,7 +26,7 @@ export default function GalleryPage() {
     };
 
     fetchGallery();
-  }, [t]);
+  }, []);
 
   const filteredImages = images;
 
@@ -90,8 +87,9 @@ export default function GalleryPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-4xl md:text-6xl mb-4">🖼️</div>
-              <p className="text-base md:text-xl text-slate-600">No images found in this category</p>
+              <div className="text-5xl md:text-7xl mb-4">�</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Gallery Images Available</h2>
+              <p className="text-base md:text-lg text-slate-600">Gallery images will be displayed here when available.</p>
             </div>
           )}
         </div>

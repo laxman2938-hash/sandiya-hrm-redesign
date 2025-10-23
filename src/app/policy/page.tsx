@@ -1,10 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-
 export default function PolicyPage() {
-  const t = useTranslations();
-  const locale = useLocale();
 
   const professionalPillars = [
     {

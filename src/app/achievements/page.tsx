@@ -1,6 +1,5 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { Achievement } from '@/types';
@@ -23,8 +22,6 @@ const animationStyles = `
 `;
 
 export default function AchievementsPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +33,7 @@ export default function AchievementsPage() {
         const response: any = await api.getAchievements();
         setAchievements(Array.isArray(response) ? response : response.data?.results || response.data || []);
       } catch (err) {
-        setError(t('common.error'));
+        setError('Error loading achievements. Please try again.');
         console.error('Error fetching achievements:', err);
       } finally {
         setLoading(false);
@@ -44,7 +41,7 @@ export default function AchievementsPage() {
     };
 
     fetchAchievements();
-  }, [t]);
+  }, []);
 
   if (loading) return (
     <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
@@ -118,8 +115,9 @@ export default function AchievementsPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-4xl md:text-6xl mb-4">🏆</div>
-              <p className="text-base md:text-xl text-slate-600">No achievements available at the moment.</p>
+              <div className="text-5xl md:text-7xl mb-4">📭</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Achievements Available</h2>
+              <p className="text-base md:text-lg text-slate-600">Our achievements will be displayed here when available.</p>
             </div>
           )}
         </div>

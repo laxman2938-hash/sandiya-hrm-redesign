@@ -1,6 +1,5 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { EmploymentCategory } from '@/types';
@@ -8,8 +7,6 @@ import { getMultilingualText } from '@/lib/utils';
 import Link from 'next/link';
 
 export default function EmploymentCategoriesPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [categories, setCategories] = useState<EmploymentCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +18,7 @@ export default function EmploymentCategoriesPage() {
         const response: any = await api.getEmploymentCategories();
         setCategories(Array.isArray(response) ? response : response.data?.results || response.data || []);
       } catch (err) {
-        setError(t('common.error'));
+        setError('Error fetching employment categories. Please try again.');
         console.error('Error fetching categories:', err);
       } finally {
         setLoading(false);
@@ -29,7 +26,7 @@ export default function EmploymentCategoriesPage() {
     };
 
     fetchCategories();
-  }, [t]);
+  }, []);
 
   if (loading) return (
     <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
@@ -40,7 +37,7 @@ export default function EmploymentCategoriesPage() {
     <div className="text-center py-20 md:py-40 text-red-600 text-xl md:text-2xl">{error}</div>
   );
 
-  const employmentTypes = [
+  const defaultEmploymentTypes = [
     {
       icon: '📋',
       title: 'Permanent Employees',
@@ -91,13 +88,64 @@ export default function EmploymentCategoriesPage() {
         </div>
       </section>
 
+      {/* Employment Categories from Database */}
+      {categories && categories.length > 0 && (
+        <section className="py-12 md:py-24 px-4 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 text-slate-900">Available Positions</h2>
+            <p className="text-center text-slate-600 mb-12 text-base md:text-lg">Browse our current employment opportunities</p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {categories.map((category: any, idx: number) => (
+                <div
+                  key={category.id || idx}
+                  className="group relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                  style={{ animation: `slideInUp 0.6s ease-out ${idx * 0.1}s forwards`, opacity: 0 }}
+                >
+                  {/* Image */}
+                  <div className="relative h-48 md:h-56 overflow-hidden bg-slate-100">
+                    {category.image ? (
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-blue-100 to-indigo-100">
+                        <span className="text-4xl">💼</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-4 md:p-6 bg-white">
+                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 mb-4">
+                      {category.description || 'Explore this employment opportunity'}
+                    </p>
+                    <button className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                      Learn More
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Employment Types Section - Advanced Grid */}
-      <section className="py-12 md:py-24 px-4 bg-white">
+      <section className={`${categories && categories.length > 0 ? 'py-12 md:py-20 px-4 bg-slate-50' : 'py-12 md:py-24 px-4 bg-white'}`}>
         <div className="max-w-6xl mx-auto">
-        
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 text-slate-900">
+            {categories && categories.length > 0 ? 'Employment Types' : 'Available Employment Types'}
+          </h2>
+          <p className="text-center text-slate-600 mb-12 text-base md:text-lg">Different employment options to match your career goals</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {employmentTypes.map((type, idx) => (
+            {defaultEmploymentTypes.map((type, idx) => (
               <div
                 key={idx}
                 className="group relative h-full rounded-xl md:rounded-2xl overflow-hidden"
@@ -124,6 +172,13 @@ export default function EmploymentCategoriesPage() {
               </div>
             ))}
           </div>
+
+          {(!categories || categories.length === 0) && (
+            <div className="text-center py-12">
+              <p className="text-slate-600 text-lg mb-2">📭 No specific employment categories available right now.</p>
+              <p className="text-slate-500">Please check back later for available positions.</p>
+            </div>
+          )}
         </div>
       </section>
 

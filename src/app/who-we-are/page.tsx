@@ -1,6 +1,5 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 interface Mission {
@@ -9,8 +8,6 @@ interface Mission {
 }
 
 export default function WhoWeArePage() {
-  const t = useTranslations();
-  const locale = useLocale();
 
   const missions: Mission[] = [
     {

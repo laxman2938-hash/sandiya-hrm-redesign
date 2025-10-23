@@ -1,14 +1,11 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { DemandLetter } from '@/types';
 
 export default function ActiveDemandLetterPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [demands, setDemands] = useState<DemandLetter[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -75,8 +72,9 @@ export default function ActiveDemandLetterPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-6xl mb-4">📭</div>
-              <p className="text-xl text-slate-600">No demand letters available at this moment.</p>
+              <div className="text-5xl md:text-7xl mb-4">📭</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Active Demand Letters</h2>
+              <p className="text-base md:text-lg text-slate-600">No job opportunities are available at the moment. Please check back later.</p>
             </div>
           )}
         </div>

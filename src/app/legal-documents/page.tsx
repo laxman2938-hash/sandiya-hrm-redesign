@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { LegalDocument } from '@/types';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 export default function LegalDocumentsPage() {
-  const t = useTranslations();
   const [documents, setDocuments] = useState<LegalDocument[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,14 +18,14 @@ export default function LegalDocumentsPage() {
         const response: any = await api.getLegalDocuments();
         setDocuments(Array.isArray(response) ? response : response.data?.results || response.data || []);
       } catch (err) {
-        setError(t('common.error'));
+        setError('Error fetching legal documents. Please try again.');
         console.error('Error fetching documents:', err);
       } finally {
         setLoading(false);
       }
     };
     fetchDocuments();
-  }, [t]);
+  }, []);
 
   if (loading) return <div className="text-center py-40 text-2xl">Loading...</div>;
 
@@ -81,8 +79,9 @@ export default function LegalDocumentsPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <div className="text-6xl mb-4">📭</div>
-              <p className="text-xl text-slate-600">No documents available at the moment.</p>
+              <div className="text-5xl md:text-7xl mb-4">📭</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Legal Documents Available</h2>
+              <p className="text-base md:text-lg text-slate-600">Legal documents will be displayed here when available.</p>
             </div>
           )}
         </div>

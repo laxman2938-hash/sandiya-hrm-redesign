@@ -1,10 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-
 export default function QualityCompliancePage() {
-  const t = useTranslations();
-  const locale = useLocale();
 
   return (
     <main className="min-h-screen bg-white">

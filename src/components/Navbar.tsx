@@ -2,11 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
 import Image from 'next/image';
 
 export default function Navbar() {
-  const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedSubmenu, setExpandedSubmenu] = useState<number | null>(null);
 

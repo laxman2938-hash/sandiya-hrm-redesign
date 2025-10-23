@@ -1,6 +1,5 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/types';
@@ -10,8 +9,6 @@ import type { Metadata } from 'next';
 // For SEO purposes, consider creating a separate metadata file
 
 export default function AboutUsPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
 

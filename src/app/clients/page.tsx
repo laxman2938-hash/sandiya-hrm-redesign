@@ -1,14 +1,11 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { Client } from '@/types';
 import Link from 'next/link';
 
 export default function ClientsPage() {
-  const t = useTranslations();
-  const locale = useLocale();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -108,8 +105,9 @@ export default function ClientsPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-5xl md:text-6xl mb-3 md:mb-4">🏢</div>
-              <p className="text-base md:text-xl text-slate-600">No clients to display at the moment.</p>
+              <div className="text-5xl md:text-7xl mb-3 md:mb-4">📭</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Clients Available</h2>
+              <p className="text-base md:text-lg text-slate-600">Client list will be displayed here when available.</p>
             </div>
           )}
         </div>

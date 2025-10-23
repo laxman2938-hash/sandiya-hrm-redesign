@@ -1,10 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-
 export default function OurProcessPage() {
-  const t = useTranslations();
-  const locale = useLocale();
 
   const recruitmentSteps = [
     {

@@ -1,11 +1,9 @@
 'use client';
 
-import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Footer() {
-  const locale = useLocale();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
