@@ -68,7 +68,7 @@ export default async function GalleryPage() {
             </h2>
             {galleryImages.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {galleryImages.map((image) => (
+                {galleryImages.map((image: any) => (
                   <div
                     key={image.id}
                     className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"

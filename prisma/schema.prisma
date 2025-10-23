@@ -1,0 +1,102 @@
+
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Good addition for connection pooling
+}
+
+// Gallery Images
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  title     String
+  image     String // URL to the image
+  createdAt DateTime @default(now())
+
+  @@map("gallery_images")
+}
+
+// Team Members
+model TeamMember {
+  id          Int      @id @default(autoincrement())
+  name        String
+  designation String?
+  image       String
+  createdAt   DateTime @default(now())
+
+  @@map("team_members")
+}
+
+
+
+// Legal Documents
+model LegalDocument {
+  id        Int      @id @default(autoincrement())
+  title     String
+  image     String
+  createdAt DateTime @default(now())
+
+  @@map("legal_documents")
+}
+
+// Achievements
+model Achievement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  image     String
+  createdAt DateTime @default(now())
+
+  @@map("achievements")
+}
+
+// Clients
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  logo      String // URL to the logo
+  createdAt DateTime @default(now())
+
+  @@map("clients")
+}
+
+// Contact Messages
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+  status    String   @default("pending") // pending, read, replied
+
+  @@map("contact_messages")
+}
+
+// Active Demand Letters (UPDATED MODEL)
+model DemandLetter {
+  id        Int      @id @default(autoincrement())
+  title     String   // e.g., "Cleaner", "Security Guard"
+  image     String   // The scan of the demand letter
+  createdAt DateTime @default(now())
+
+  @@map("demand_letters")
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  company   String?
+  quote     String   @db.Text
+  image     String?  // <-- Add the '?' to make it optional
+  createdAt DateTime @default(now())
+
+  @@map("testimonials")
+}
