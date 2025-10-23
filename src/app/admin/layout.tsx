@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ReactNode } from "react";
+import { redirect } from 'next/navigation';
+import { getSession } from '@/lib/auth';
+import LogoutButton from '@/components/LogoutButton';
 import "../globals.css";
 
 export const metadata = {
@@ -8,7 +11,14 @@ export const metadata = {
   description: "Manage your website content",
 };
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export default async function AdminLayout({ children }: { children: ReactNode }) {
+  // Check authentication
+  const user = await getSession();
+  
+  if (!user) {
+    redirect('/login');
+  }
+
   const menuItems = [
     { name: "Dashboard", href: "/admin" },
     { name: "Gallery", href: "/admin/gallery" },
@@ -69,15 +79,20 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <header className="bg-white shadow-sm px-8 py-4 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-semibold text-gray-800">Welcome to Admin Panel</h2>
-            <p className="text-gray-600 text-sm mt-1">Manage your website content from here</p>
+            <p className="text-gray-600 text-sm mt-1">
+              Logged in as: <span className="font-medium text-blue-600">{user.username}</span>
+            </p>
           </div>
-          <Image
-            src="/sandhaya.png"
-            alt="Sandiya HRM"
-            width={50}
-            height={50}
-            className="object-contain"
-          />
+          <div className="flex items-center gap-4">
+            <Image
+              src="/sandhaya.png"
+              alt="Sandiya HRM"
+              width={50}
+              height={50}
+              className="object-contain"
+            />
+            <LogoutButton />
+          </div>
         </header>
         <div className="p-8">{children}</div>
       </main>

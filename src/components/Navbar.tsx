@@ -53,7 +53,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden lg:flex gap-1">
             {navItems.map((item, idx) => (
-              <div key={`nav-item-${idx}`} className="group relative animate-fade-in-down" style={{ animationDelay: `${idx * 0.05}s` }}>
+              <div key={`nav-item-${idx}`} className="group relative" style={{ animation: 'fade-in-down 0.5s ease-out forwards', animationDelay: `${idx * 0.05}s` }}>
                 <Link
                   href={item.href}
                   className="px-4 py-2 text-slate-700 hover:text-blue-600 transition-all duration-300 font-semibold text-sm flex items-center gap-1 group-hover:text-blue-600 relative"
@@ -104,7 +104,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden pb-4 sm:pb-6 space-y-1 border-t border-slate-100 animate-fade-in-down bg-slate-50">
+          <div className="lg:hidden pb-4 sm:pb-6 space-y-1 border-t border-slate-100 bg-slate-50" style={{ animation: 'fade-in-down 0.5s ease-out forwards' }}>
             {navItems.map((item, idx) => (
               <div key={`mobile-nav-item-${idx}`}>
                 {item.submenu ? (
@@ -127,7 +127,7 @@ export default function Navbar() {
                   </Link>
                 )}
                 {item.submenu && expandedSubmenu === idx && (
-                  <div className="pl-3 sm:pl-4 space-y-1 bg-blue-50 rounded-lg my-1 py-2 border-l-2 border-blue-200 animate-fade-in-down">
+                  <div className="pl-3 sm:pl-4 space-y-1 bg-blue-50 rounded-lg my-1 py-2 border-l-2 border-blue-200" style={{ animation: 'fade-in-down 0.5s ease-out forwards' }}>
                     {item.submenu.map((subitem, subIdx) => (
                       <Link
                         key={`mobile-submenu-item-${idx}-${subIdx}`}
@@ -155,22 +155,20 @@ export default function Navbar() {
         )}
       </div>
 
-      <style jsx>{`
-        @keyframes fade-in-down {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes fade-in-down {
+            from {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-down {
-          animation: fade-in-down 0.5s ease-out forwards;
-        }
-      `}</style>
+        `
+      }} />
     </nav>
   );
 }

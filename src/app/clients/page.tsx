@@ -1,49 +1,56 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
+import { useState } from 'react';
 import { Client } from '@/types';
-import Link from 'next/link';
+
+// Static clients data - replace with API call when backend is ready
+const staticClients: Client[] = [
+  {
+    id: 1,
+    name: 'Nepal Government',
+    logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop'
+  },
+  {
+    id: 2,
+    name: 'Qatar Airways',
+    logo: 'https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=200&h=100&fit=crop'
+  },
+  {
+    id: 3,
+    name: 'Emirates Group',
+    logo: 'https://images.unsplash.com/photo-1583474663861-9ed515115c12?w=200&h=100&fit=crop'
+  },
+  {
+    id: 4,
+    name: 'Saudi Aramco',
+    logo: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=200&h=100&fit=crop'
+  },
+  {
+    id: 5,
+    name: 'Construction Company',
+    logo: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=200&h=100&fit=crop'
+  },
+  {
+    id: 6,
+    name: 'Healthcare Services',
+    logo: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=200&h=100&fit=crop'
+  },
+  {
+    id: 7,
+    name: 'Manufacturing Corp',
+    logo: 'https://images.unsplash.com/photo-1565087771138-e8e35998d7e6?w=200&h=100&fit=crop'
+  },
+  {
+    id: 8,
+    name: 'International Hotel',
+    logo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=100&fit=crop'
+  }
+];
 
 export default function ClientsPage() {
-  const [clients, setClients] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        setLoading(true);
-        console.log('Fetching clients from:', window.location.origin + '/api/clients');
-        
-        const response = await fetch(window.location.origin + '/api/clients', {
-          method: 'GET',
-          headers: { 'Accept': 'application/json' },
-          mode: 'cors',
-          cache: 'no-store',
-        });
-        
-        console.log('Fetch response status:', response.status);
-        
-        if (!response.ok) {
-          console.error('API returned status:', response.status);
-          setError('Failed to fetch clients');
-          return;
-        }
-        
-        const data = await response.json();
-        console.log('Clients data received:', data);
-        setClients(Array.isArray(data) ? data : []);
-      } catch (err: any) {
-        console.error('Error fetching clients:', err);
-        setError('Something went wrong');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchClients();
-  }, []);
+  const [clients] = useState<Client[]>(staticClients);
+  const loading = false;
+  const error = null;
 
   if (loading) return (
     <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
@@ -105,9 +112,14 @@ export default function ClientsPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-5xl md:text-7xl mb-3 md:mb-4">📭</div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Clients Available</h2>
-              <p className="text-base md:text-lg text-slate-600">Client list will be displayed here when available.</p>
+              <div className="text-5xl md:text-7xl mb-3 md:mb-4">🤝</div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">Building Our Client Network</h2>
+              <p className="text-base md:text-lg text-slate-600 mb-4">
+                We are actively building partnerships with leading organizations.
+              </p>
+              <p className="text-sm md:text-base text-slate-500">
+                Contact us to become part of our growing client family.
+              </p>
             </div>
           )}
         </div>
@@ -150,33 +162,20 @@ export default function ClientsPage() {
 
 
 
-      <style jsx>{`
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-        }
-      `}</style>
+        `
+      }} />
     </main>
   );
 }

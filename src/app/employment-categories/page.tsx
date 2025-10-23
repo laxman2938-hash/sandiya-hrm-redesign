@@ -82,8 +82,7 @@ export default function EmploymentCategoriesPage() {
                   {category.description}
                 </p>
 
-                {/* Learn More Button */}
-              
+               
               </div>
             ))}
           </div>
@@ -98,7 +97,7 @@ export default function EmploymentCategoriesPage() {
             Each employment category offers unique benefits and flexibility. Select the option that aligns best with your career aspirations.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ animation: 'slideInUp 0.8s ease-out forwards' }}>
             {employmentCategories.map((category) => (
               <div key={category.id} className="flex gap-4">
                 <div className={`bg-linear-to-br ${category.color} w-12 h-12 rounded-lg flex items-center justify-center shrink-0`}>
@@ -147,33 +146,20 @@ export default function EmploymentCategoriesPage() {
 
     
 
-      <style jsx>{`
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-        }
-      `}</style>
+        `
+      }} />
     </main>
   );
 }
