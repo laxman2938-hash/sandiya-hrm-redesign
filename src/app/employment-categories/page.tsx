@@ -1,184 +1,147 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
-import { EmploymentCategory } from '@/types';
-import { getMultilingualText } from '@/lib/utils';
-import Link from 'next/link';
-
 export default function EmploymentCategoriesPage() {
-  const [categories, setCategories] = useState<EmploymentCategory[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const response: any = await api.getEmploymentCategories();
-        setCategories(Array.isArray(response) ? response : response.data?.results || response.data || []);
-      } catch (err) {
-        setError('Error fetching employment categories. Please try again.');
-        console.error('Error fetching categories:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  if (loading) return (
-    <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
-      <div className="animate-pulse">Loading employment categories...</div>
-    </div>
-  );
-  if (error) return (
-    <div className="text-center py-20 md:py-40 text-red-600 text-xl md:text-2xl">{error}</div>
-  );
-
-  const defaultEmploymentTypes = [
+  // Static employment categories data matching sandiyahrm.com design
+  const employmentCategories = [
     {
-      icon: '📋',
+      id: 1,
       title: 'Permanent Employees',
       description: 'Long-term employment opportunities with full-time positions, offering job security, benefits, and career growth.',
-      features: ['Stable employment', 'Full benefits package', 'Career advancement', 'Job security'],
-      gradient: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-blue-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      hoverBg: 'hover:bg-blue-100'
     },
     {
-      icon: '📝',
+      id: 2,
       title: 'Contract Employees',
       description: 'Fixed-term employment for specific projects or durations, with clear contract terms and conditions.',
-      features: ['Fixed-term engagement', 'Clear terms', 'Project-based work', 'Competitive rates'],
-      gradient: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-purple-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      hoverBg: 'hover:bg-purple-100'
     },
     {
-      icon: '⏰',
+      id: 3,
       title: 'Temporary Employees',
       description: 'Flexible temporary positions to meet immediate business needs, ideal for seasonal or short-term work.',
-      features: ['Flexible timeline', 'Immediate deployment', 'Easy hiring process', 'Test-and-hire option'],
-      gradient: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-green-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      hoverBg: 'hover:bg-green-100'
     },
     {
-      icon: '🕐',
+      id: 4,
       title: 'Part-Time Employees',
       description: 'Part-time work opportunities perfect for those seeking flexible schedules and supplementary income.',
-      features: ['Flexible hours', 'Work-life balance', 'Multiple benefits', 'Easy scheduling'],
-      gradient: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-orange-600',
+      bgColor: 'bg-orange-50',
+      borderColor: 'border-orange-200',
+      hoverBg: 'hover:bg-orange-100'
     },
   ];
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-white via-blue-50 to-white">
-      {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl"></div>
+    <main className="min-h-screen bg-white">
+      {/* Hero Section - Minimal */}
+      <section className="bg-linear-to-r from-blue-900 to-indigo-900 text-white py-16 md:py-28 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Employment Categories</h1>
+          <p className="text-base md:text-lg text-blue-100 max-w-2xl mx-auto">
+            Explore our diverse employment options tailored to match your career goals
+          </p>
         </div>
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center">
-            <span className="inline-block bg-blue-500/20 backdrop-blur-md border border-blue-400/30 rounded-full px-4 md:px-6 py-2 mb-4 md:mb-6 text-xs md:text-sm font-semibold text-blue-100">
-              💼 Career Options
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 md:mb-4 leading-tight animate-fade-in-up">Employment Categories</h1>
-            <p className="text-base md:text-xl text-blue-100 max-w-2xl mx-auto px-2">
-              Explore diverse employment types and find what suits you best
-            </p>
+      </section>
+
+      {/* Employment Categories Grid - Clean Card Layout */}
+      <section className="py-16 md:py-28 px-4 md:px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {employmentCategories.map((category, idx) => (
+              <div
+                key={category.id}
+                className={`${category.bgColor} ${category.hoverBg} border-2 ${category.borderColor} rounded-2xl p-8 md:p-10 transition-all duration-300 cursor-pointer transform hover:-translate-y-2 hover:shadow-xl`}
+                style={{ 
+                  animation: `slideInUp 0.6s ease-out ${idx * 0.12}s forwards`, 
+                  opacity: 0 
+                }}
+              >
+                {/* Category Header */}
+                <div className={`bg-linear-to-br ${category.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition`}>
+                  <span className="text-3xl text-white">
+                    {category.id === 1 && '👔'}
+                    {category.id === 2 && '📋'}
+                    {category.id === 3 && '⏱️'}
+                    {category.id === 4 && '🕐'}
+                  </span>
+                </div>
+
+                {/* Title and Description */}
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">{category.title}</h3>
+                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                  {category.description}
+                </p>
+
+                {/* Learn More Button */}
+              
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Employment Categories from Database */}
-      {categories && categories.length > 0 && (
-        <section className="py-12 md:py-24 px-4 bg-white">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 text-slate-900">Available Positions</h2>
-            <p className="text-center text-slate-600 mb-12 text-base md:text-lg">Browse our current employment opportunities</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {categories.map((category: any, idx: number) => (
-                <div
-                  key={category.id || idx}
-                  className="group relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-                  style={{ animation: `slideInUp 0.6s ease-out ${idx * 0.1}s forwards`, opacity: 0 }}
-                >
-                  {/* Image */}
-                  <div className="relative h-48 md:h-56 overflow-hidden bg-slate-100">
-                    {category.image ? (
-                      <img
-                        src={category.image}
-                        alt={category.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-blue-100 to-indigo-100">
-                        <span className="text-4xl">💼</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-4 md:p-6 bg-white">
-                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">
-                      {category.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 mb-4">
-                      {category.description || 'Explore this employment opportunity'}
-                    </p>
-                    <button className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-                      Learn More
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Employment Types Section - Advanced Grid */}
-      <section className={`${categories && categories.length > 0 ? 'py-12 md:py-20 px-4 bg-slate-50' : 'py-12 md:py-24 px-4 bg-white'}`}>
+      {/* Details Section */}
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 text-slate-900">
-            {categories && categories.length > 0 ? 'Employment Types' : 'Available Employment Types'}
-          </h2>
-          <p className="text-center text-slate-600 mb-12 text-base md:text-lg">Different employment options to match your career goals</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-slate-900">Choose What Works For You</h2>
+          <p className="text-center text-slate-600 text-lg mb-12 max-w-2xl mx-auto">
+            Each employment category offers unique benefits and flexibility. Select the option that aligns best with your career aspirations.
+          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {defaultEmploymentTypes.map((type, idx) => (
-              <div
-                key={idx}
-                className="group relative h-full rounded-xl md:rounded-2xl overflow-hidden"
-                style={{ animation: `slideInUp 0.6s ease-out ${idx * 0.1}s forwards`, opacity: 0 }}
-              >
-                {/* Background */}
-                <div className="absolute inset-0 bg-linear-to-br from-slate-50 to-blue-50 group-hover:opacity-0 transition duration-300"></div>
-                <div className={`absolute inset-0 bg-linear-to-br ${type.gradient} opacity-0 group-hover:opacity-100 transition duration-300`}></div>
-                
-                {/* Content */}
-                <div className="relative p-4 md:p-8 rounded-xl md:rounded-2xl border border-blue-100 group-hover:border-transparent transition h-full flex flex-col">
-                  <div className="text-4xl md:text-5xl mb-3 md:mb-4 transform group-hover:scale-125 transition">{type.icon}</div>
-                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-slate-900 group-hover:text-white transition">{type.title}</h3>
-                  <p className="text-xs md:text-sm text-slate-700 group-hover:text-white/90 transition mb-4 md:mb-6 grow">{type.description}</p>
-                  <div className="space-y-1 md:space-y-2">
-                    {type.features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs md:text-sm text-slate-700 group-hover:text-white/90 transition">
-                        <span className="text-blue-600 group-hover:text-white/70 mt-0.5 shrink-0">✓</span>
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {employmentCategories.map((category) => (
+              <div key={category.id} className="flex gap-4">
+                <div className={`bg-linear-to-br ${category.color} w-12 h-12 rounded-lg flex items-center justify-center shrink-0`}>
+                  <span className="text-2xl text-white">
+                    {category.id === 1 && '✓'}
+                    {category.id === 2 && '✓'}
+                    {category.id === 3 && '✓'}
+                    {category.id === 4 && '✓'}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-slate-900 mb-2">{category.title}</h4>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {category.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {(!categories || categories.length === 0) && (
-            <div className="text-center py-12">
-              <p className="text-slate-600 text-lg mb-2">📭 No specific employment categories available right now.</p>
-              <p className="text-slate-500">Please check back later for available positions.</p>
-            </div>
-          )}
+      {/* CTA Section */}
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-r from-blue-900 to-indigo-900 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Find Your Perfect Role?</h2>
+          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
+            Connect with us today to explore employment opportunities that match your skills and ambitions
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/contact"
+              className="inline-block bg-white text-blue-900 px-10 py-4 rounded-lg font-bold hover:bg-blue-50 transition transform hover:scale-105"
+            >
+              Get in Touch
+            </a>
+            <a
+              href="/"
+              className="inline-block border-2 border-white text-white px-10 py-4 rounded-lg font-bold hover:bg-white/10 transition"
+            >
+              Back to Home
+            </a>
+          </div>
         </div>
       </section>
 
