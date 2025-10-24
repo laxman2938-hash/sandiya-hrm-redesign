@@ -146,7 +146,7 @@ export default function OurProcessPage() {
                     <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
                       <div className="text-3xl sm:text-4xl md:text-5xl shrink-0">{item.icon}</div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-1 sm:mb-2 break-words">{item.title}</h3>
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-1 sm:mb-2 wrap-break-word">{item.title}</h3>
                         <div className="inline-block bg-blue-600 text-white px-2.5 sm:px-3 md:px-4 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold">
                           Step {item.step}
                         </div>
