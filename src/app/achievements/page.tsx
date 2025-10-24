@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getAchievements } from '@/lib/data';
 import { Achievement } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 import Link from 'next/link';
@@ -31,12 +30,20 @@ export default function AchievementsPage() {
       try {
         setLoading(true);
         setError(null);
-        const achievements = await getAchievements();
-        setAchievements(achievements || []);
+        console.log('🔄 Frontend: Fetching achievements from API...');
+        const response = await fetch('/api/achievements');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Achievements data received:', data.length || 0);
+        setAchievements(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load achievements:', error);
+        console.error('❌ Frontend: Failed to load achievements:', error);
         setError('Failed to load achievements');
-        setAchievements([]); // Set empty array on error
+        setAchievements([]);
       } finally {
         setLoading(false);
       }

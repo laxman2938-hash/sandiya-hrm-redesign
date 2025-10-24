@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getLegalDocuments } from '@/lib/data';
 import { LegalDocument } from '@/types';
 import Link from 'next/link';
 
@@ -16,12 +15,20 @@ export default function LegalDocumentsPage() {
       try {
         setLoading(true);
         setError(null);
-        const documents = await getLegalDocuments();
-        setDocuments(documents || []);
+        console.log('🔄 Frontend: Fetching legal documents from API...');
+        const response = await fetch('/api/legal-documents');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Legal documents data received:', data.length || 0);
+        setDocuments(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load legal documents:', error);
+        console.error('❌ Frontend: Failed to load legal documents:', error);
         setError('Failed to load legal documents');
-        setDocuments([]); // Set empty array on error
+        setDocuments([]);
       } finally {
         setLoading(false);
       }

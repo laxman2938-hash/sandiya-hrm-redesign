@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Client } from '@/types';
-import { getClients } from '@/lib/data';
 
 export default function ClientsPage() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -14,12 +13,20 @@ export default function ClientsPage() {
       try {
         setLoading(true);
         setError(null);
-        const clients = await getClients();
-        setClients(clients || []);
+        console.log('🔄 Frontend: Fetching clients from API...');
+        const response = await fetch('/api/clients');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Clients data received:', data.length || 0);
+        setClients(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load clients:', error);
+        console.error('❌ Frontend: Failed to load clients:', error);
         setError('Failed to load clients');
-        setClients([]); // Set empty array on error
+        setClients([]);
       } finally {
         setLoading(false);
       }

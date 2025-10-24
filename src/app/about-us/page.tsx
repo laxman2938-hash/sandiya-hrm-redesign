@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/types';
-import { getTeamMembers } from '@/lib/data';
 
 // Note: This is a client component, metadata should ideally be in a layout
 // For SEO purposes, consider creating a separate metadata file
@@ -18,10 +17,18 @@ export default function AboutUsPage() {
       try {
         setLoading(true);
         setError(null);
-        const members = await getTeamMembers();
-        setTeamMembers(members || []);
+        console.log('🔄 Frontend: Fetching team members from API...');
+        const response = await fetch('/api/team');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Team members data received:', data.length || 0);
+        setTeamMembers(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load team members:', error);
+        console.error('❌ Frontend: Failed to load team members:', error);
         setError('Failed to load team members');
         setTeamMembers([]);
       } finally {

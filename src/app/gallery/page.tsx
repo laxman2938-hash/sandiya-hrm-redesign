@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getGalleryImages } from '@/lib/data';
 import { GalleryImage } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 
@@ -16,12 +15,20 @@ export default function GalleryPage() {
       try {
         setLoading(true);
         setError(null);
-        const images = await getGalleryImages();
-        setImages(images || []);
+        console.log('🔄 Frontend: Fetching gallery from API...');
+        const response = await fetch('/api/gallery');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Gallery data received:', data.length || 0);
+        setImages(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load gallery:', error);
+        console.error('❌ Frontend: Failed to load gallery:', error);
         setError('Failed to load gallery');
-        setImages([]); // Set empty array on error
+        setImages([]);
       } finally {
         setLoading(false);
       }

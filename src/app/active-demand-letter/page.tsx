@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getDemandLetters } from '@/lib/data';
 import { DemandLetter } from '@/types';
 
 export default function ActiveDemandLetterPage() {
@@ -16,12 +15,20 @@ export default function ActiveDemandLetterPage() {
       try {
         setLoading(true);
         setError(null);
-        const letters = await getDemandLetters();
-        setDemands(letters || []);
+        console.log('🔄 Frontend: Fetching demand letters from API...');
+        const response = await fetch('/api/demand-letters');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('✅ Frontend: Demand letters data received:', data.length || 0);
+        setDemands(Array.isArray(data) ? data : []);
       } catch (error) {
-        console.error('Failed to load demand letters:', error);
+        console.error('❌ Frontend: Failed to load demand letters:', error);
         setError('Failed to load demand letters');
-        setDemands([]); // Set empty array on error
+        setDemands([]);
       } finally {
         setLoading(false);
       }
