@@ -1,5 +1,11 @@
 {
+  "buildCommand": "npm run vercel-build",
   "env": {
     "PRISMA_GENERATE_SKIP_AUTOINSTALL": "false"
+  },
+  "functions": {
+    "app/**/*": {
+      "maxDuration": 30
+    }
   }
 }
