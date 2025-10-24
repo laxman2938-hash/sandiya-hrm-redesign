@@ -9,8 +9,11 @@ const globalForPrisma = globalThis as unknown as {
 
 // Validate environment variables
 if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set');
+  console.error('❌ DATABASE_URL is missing!');
+  throw new Error('DATABASE_URL environment variable is not set. Please add it to your environment variables.');
 }
+
+console.log('✅ DATABASE_URL is set:', process.env.DATABASE_URL ? 'Yes' : 'No');
 
 export const prisma =
   globalForPrisma.prisma ??

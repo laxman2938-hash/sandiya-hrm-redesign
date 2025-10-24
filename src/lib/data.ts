@@ -2,16 +2,40 @@
 
 import { prisma } from "@/lib/prisma";
 
+// Health check function
+export async function testDatabaseConnection() {
+  try {
+    console.log('🔄 Testing database connection...');
+    const result = await prisma.$queryRaw`SELECT 1 as test`;
+    console.log('✅ Database connection successful:', result);
+    return { success: true, message: 'Database connected successfully' };
+  } catch (error) {
+    console.error('❌ Database connection failed:', error);
+    return { 
+      success: false, 
+      message: `Database connection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
 // Gallery functions
 export async function getGalleryImages() {
   try {
+    console.log('🔄 Fetching gallery images...');
     const images = await prisma.galleryImage.findMany({
       orderBy: { createdAt: 'desc' }
     });
+    console.log('✅ Gallery images fetched:', images.length);
     return images;
   } catch (error) {
-    console.error('Failed to fetch gallery images:', error);
-    throw new Error('Failed to load gallery images');
+    console.error('❌ Failed to fetch gallery images:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      code: (error as any)?.code,
+      meta: (error as any)?.meta
+    });
+    throw new Error(`Failed to load gallery images: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
 
