@@ -98,7 +98,16 @@ export default async function TestimonialsPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No testimonials yet. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">💬</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Testimonials Yet</h3>
+                <p className="text-gray-600 mb-4">
+                  Collect and display client testimonials to build credibility and trust with potential clients.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Ask satisfied clients for testimonials to showcase your success stories.
+                </div>
+              </div>
             )}
           </div>
         </div>

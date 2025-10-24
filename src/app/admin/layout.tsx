@@ -11,6 +11,9 @@ export const metadata = {
   description: "Manage your website content",
 };
 
+// Force dynamic rendering for admin routes
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   // Check authentication
   const user = await getSession();

@@ -24,9 +24,10 @@ export const api = new Proxy({} as any, {
     return async () => {
       try {
         const endpoint = String(prop)
-          .replace(/^get/, '')
-          .replace(/([A-Z])/g, '-$1')
-          .toLowerCase();
+          .replace(/^get/, '') // Remove 'get' prefix
+          .replace(/([A-Z])/g, '-$1') // Add hyphen before capital letters
+          .toLowerCase()
+          .replace(/^-/, ''); // Remove leading hyphen if it exists
         const response = await fetch(`/api/${endpoint}`);
         return await response.json();
       } catch (error) {

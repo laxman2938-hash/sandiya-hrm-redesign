@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
+import { getAchievements } from '@/lib/data';
 import { Achievement } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 import Link from 'next/link';
@@ -27,20 +27,22 @@ export default function AchievementsPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchAchievements = async () => {
+    const loadAchievements = async () => {
       try {
         setLoading(true);
-        const response: any = await api.getAchievements();
-        setAchievements(Array.isArray(response) ? response : response.data?.results || response.data || []);
-      } catch (err) {
-        setError('Error loading achievements. Please try again.');
-        console.error('Error fetching achievements:', err);
+        setError(null);
+        const achievements = await getAchievements();
+        setAchievements(achievements || []);
+      } catch (error) {
+        console.error('Failed to load achievements:', error);
+        setError('Failed to load achievements');
+        setAchievements([]); // Set empty array on error
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAchievements();
+    loadAchievements();
   }, []);
 
   if (loading) return (
@@ -115,9 +117,14 @@ export default function AchievementsPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-5xl md:text-7xl mb-4">📭</div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Achievements Available</h2>
-              <p className="text-base md:text-lg text-slate-600">Our achievements will be displayed here when available.</p>
+              <div className="text-6xl mb-4">🏆</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Achievements Available</h3>
+              <p className="text-gray-600 mb-4">
+                Our achievements and awards will be displayed here when available.
+              </p>
+              <div className="text-sm text-gray-500">
+                💡 We are continuously working towards excellence and recognition.
+              </div>
             </div>
           )}
         </div>

@@ -111,7 +111,16 @@ export default async function GalleryPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No gallery images yet. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">📸</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Gallery Images</h3>
+                <p className="text-gray-600 mb-4">
+                  Your gallery is empty. Start by adding your first image to showcase your work.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Add high-quality images that represent your company's achievements and activities.
+                </div>
+              </div>
             )}
           </div>
         </div>

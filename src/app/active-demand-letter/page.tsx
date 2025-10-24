@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
+import { getDemandLetters } from '@/lib/data';
 import { DemandLetter } from '@/types';
 
 export default function ActiveDemandLetterPage() {
@@ -12,24 +12,47 @@ export default function ActiveDemandLetterPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchDemandLetters = async () => {
+    const loadDemandLetters = async () => {
       try {
         setLoading(true);
-        const response: any = await api.getDemandLetters();
-        const data = Array.isArray(response) ? response : response.data?.results || response.data || [];
-        setDemands(data);
-      } catch (err) {
-        setError('Error fetching demand letters');
-        console.error('Error fetching demand letters:', err);
+        setError(null);
+        const letters = await getDemandLetters();
+        setDemands(letters || []);
+      } catch (error) {
+        console.error('Failed to load demand letters:', error);
+        setError('Failed to load demand letters');
+        setDemands([]); // Set empty array on error
       } finally {
         setLoading(false);
       }
     };
-    fetchDemandLetters();
+
+    loadDemandLetters();
   }, []);
 
-  if (loading) return <div className="text-center py-40 text-2xl">Loading...</div>;
-  if (error) return <div className="text-center py-40 text-2xl text-red-600">{error}</div>;
+  if (loading) return (
+    <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
+      <div className="animate-pulse">Loading demand letters...</div>
+    </div>
+  );
+  
+  if (error) return (
+    <main className="min-h-screen bg-white">
+      <div className="text-center py-20 md:py-40">
+        <div className="text-6xl mb-4">⚠️</div>
+        <h3 className="text-xl font-semibold text-red-600 mb-2">Failed to Load Demand Letters</h3>
+        <p className="text-gray-600 mb-4">
+          Unable to load demand letters. Please check your connection and try again.
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Retry
+        </button>
+      </div>
+    </main>
+  );
 
   return (
     <main className="min-h-screen bg-white">
@@ -72,9 +95,14 @@ export default function ActiveDemandLetterPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-5xl md:text-7xl mb-4">📭</div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Active Demand Letters</h2>
-              <p className="text-base md:text-lg text-slate-600">No job opportunities are available at the moment. Please check back later.</p>
+              <div className="text-6xl mb-4">�</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Active Demand Letters</h3>
+              <p className="text-gray-600 mb-4">
+                Current job opportunities from our partner employers will be displayed here when available.
+              </p>
+              <div className="text-sm text-gray-500">
+                💡 Check back regularly for new employment opportunities.
+              </div>
             </div>
           )}
         </div>

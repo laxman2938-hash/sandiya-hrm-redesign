@@ -8,7 +8,6 @@ interface Mission {
 }
 
 export default function WhoWeArePage() {
-
   const missions: Mission[] = [
     {
       title: 'Our Mission',

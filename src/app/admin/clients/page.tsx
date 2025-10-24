@@ -85,7 +85,16 @@ export default async function ClientsPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No clients yet. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🤝</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Clients Added</h3>
+                <p className="text-gray-600 mb-4">
+                  Display your client logos to showcase partnerships and build trust with potential clients.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Add client logos to demonstrate your successful partnerships.
+                </div>
+              </div>
             )}
           </div>
         </div>

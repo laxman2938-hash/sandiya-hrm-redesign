@@ -9,7 +9,7 @@ export interface GalleryImage {
 export interface TeamMember {
   id: number;
   name: string;
-  designation: string;
+  designation?: string | null;
   image: string;
 }
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/types';
-import type { Metadata } from 'next';
+import { getTeamMembers } from '@/lib/data';
 
 // Note: This is a client component, metadata should ideally be in a layout
 // For SEO purposes, consider creating a separate metadata file
@@ -11,23 +11,25 @@ import type { Metadata } from 'next';
 export default function AboutUsPage() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchTeamMembers = async () => {
+    const loadTeamMembers = async () => {
       try {
-        const response = await fetch('/api/team-members');
-        const data = await response.json();
-        if (data.success && data.data) {
-          setTeamMembers(data.data);
-        }
+        setLoading(true);
+        setError(null);
+        const members = await getTeamMembers();
+        setTeamMembers(members || []);
       } catch (error) {
-        console.error('Error fetching team members:', error);
+        console.error('Failed to load team members:', error);
+        setError('Failed to load team members');
+        setTeamMembers([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTeamMembers();
+    loadTeamMembers();
   }, []);
 
   return (
@@ -76,11 +78,29 @@ export default function AboutUsPage() {
             <p className="text-xl text-slate-600">A team of experienced professionals committed to ethical and effective recruitment</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {loading ? (
-              <div className="col-span-full text-center py-10">Loading team members...</div>
-            ) : teamMembers.length > 0 ? (
-              teamMembers.map((member, idx) => (
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="text-xl text-slate-600">
+                <div className="animate-pulse">Loading our amazing team...</div>
+              </div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-xl font-semibold text-red-600 mb-2">Failed to Load Team</h3>
+              <p className="text-gray-600 mb-4">
+                Unable to load team member information. Please check your connection and try again.
+              </p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Retry
+              </button>
+            </div>
+          ) : teamMembers.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {teamMembers.map((member, idx) => (
                 <div
                   key={member.id}
                   className="bg-linear-to-br from-slate-50 to-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8 hover:shadow-lg transition transform hover:-translate-y-2 text-center w-full"
@@ -110,14 +130,23 @@ export default function AboutUsPage() {
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-slate-900">{member.name}</h3>
                   <p className="text-sm font-semibold text-blue-600">
-                    {member.designation}
+                    {member.designation || 'Team Member'}
                   </p>
                 </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center py-10">No team members found</div>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">👥</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Team Members Available</h3>
+              <p className="text-gray-600 mb-4">
+                Our team member profiles will be displayed here when available.
+              </p>
+              <div className="text-sm text-gray-500">
+                💡 We're working on updating our team section with the latest information.
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

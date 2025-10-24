@@ -87,7 +87,16 @@ export default async function AchievementsPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No achievements yet. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🏆</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Achievements Yet</h3>
+                <p className="text-gray-600 mb-4">
+                  Showcase your company's accomplishments, awards, and certifications here.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Add certificates, awards, and milestones to build credibility.
+                </div>
+              </div>
             )}
           </div>
         </div>

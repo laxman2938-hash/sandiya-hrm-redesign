@@ -87,7 +87,16 @@ export default async function DemandLettersPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No active demands. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">📋</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Active Demand Letters</h3>
+                <p className="text-gray-600 mb-4">
+                  Post active job demands to attract qualified candidates and showcase available opportunities.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Keep demand letters updated to attract the right candidates.
+                </div>
+              </div>
             )}
           </div>
         </div>

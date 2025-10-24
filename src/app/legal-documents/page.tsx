@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
+import { getLegalDocuments } from '@/lib/data';
 import { LegalDocument } from '@/types';
 import Link from 'next/link';
 
@@ -12,22 +12,29 @@ export default function LegalDocumentsPage() {
   const [selectedDocument, setSelectedDocument] = useState<LegalDocument | null>(null);
 
   useEffect(() => {
-    const fetchDocuments = async () => {
+    const loadDocuments = async () => {
       try {
         setLoading(true);
-        const response: any = await api.getLegalDocuments();
-        setDocuments(Array.isArray(response) ? response : response.data?.results || response.data || []);
-      } catch (err) {
-        setError('Error fetching legal documents. Please try again.');
-        console.error('Error fetching documents:', err);
+        setError(null);
+        const documents = await getLegalDocuments();
+        setDocuments(documents || []);
+      } catch (error) {
+        console.error('Failed to load legal documents:', error);
+        setError('Failed to load legal documents');
+        setDocuments([]); // Set empty array on error
       } finally {
         setLoading(false);
       }
     };
-    fetchDocuments();
+
+    loadDocuments();
   }, []);
 
-  if (loading) return <div className="text-center py-40 text-2xl">Loading...</div>;
+  if (loading) return (
+    <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-slate-600">
+      <div className="animate-pulse">Loading legal documents...</div>
+    </div>
+  );
 
   return (
     <main className="min-h-screen bg-white">
@@ -45,7 +52,19 @@ export default function LegalDocumentsPage() {
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           {error ? (
-            <div className="text-center text-red-600 text-lg">{error}</div>
+            <div className="text-center py-20">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-xl font-semibold text-red-600 mb-2">Failed to Load Legal Documents</h3>
+              <p className="text-gray-600 mb-4">
+                Unable to load legal documents. Please check your connection and try again.
+              </p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Retry
+              </button>
+            </div>
           ) : documents.length > 0 ? (
             <>
               <div className="text-center mb-16">
@@ -79,9 +98,14 @@ export default function LegalDocumentsPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <div className="text-5xl md:text-7xl mb-4">📭</div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Legal Documents Available</h2>
-              <p className="text-base md:text-lg text-slate-600">Legal documents will be displayed here when available.</p>
+              <div className="text-6xl mb-4">�</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Legal Documents Available</h3>
+              <p className="text-gray-600 mb-4">
+                Official documents and compliance certifications will be displayed here when available.
+              </p>
+              <div className="text-sm text-gray-500">
+                💡 Our legal documentation is being prepared for public access.
+              </div>
             </div>
           )}
         </div>

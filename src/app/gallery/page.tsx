@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { api } from '@/lib/api';
+import { getGalleryImages } from '@/lib/data';
 import { GalleryImage } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 
@@ -12,20 +12,22 @@ export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   useEffect(() => {
-    const fetchGallery = async () => {
+    const loadGallery = async () => {
       try {
         setLoading(true);
-        const response: any = await api.getGallery();
-        setImages(Array.isArray(response) ? response : response.data?.results || response.data || []);
-      } catch (err) {
-        setError('Error loading gallery. Please try again.');
-        console.error('Error fetching gallery:', err);
+        setError(null);
+        const images = await getGalleryImages();
+        setImages(images || []);
+      } catch (error) {
+        console.error('Failed to load gallery:', error);
+        setError('Failed to load gallery');
+        setImages([]); // Set empty array on error
       } finally {
         setLoading(false);
       }
     };
 
-    fetchGallery();
+    loadGallery();
   }, []);
 
   const filteredImages = images;
@@ -35,8 +37,23 @@ export default function GalleryPage() {
       <div className="animate-pulse">Loading gallery...</div>
     </div>
   );
+  
   if (error) return (
-    <div className="text-center py-20 md:py-40 text-xl md:text-2xl text-red-600">{error}</div>
+    <main className="min-h-screen bg-white">
+      <div className="text-center py-20 md:py-40">
+        <div className="text-6xl mb-4">⚠️</div>
+        <h3 className="text-xl font-semibold text-red-600 mb-2">Failed to Load Gallery</h3>
+        <p className="text-gray-600 mb-4">
+          Unable to load gallery images. Please check your connection and try again.
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Retry
+        </button>
+      </div>
+    </main>
   );
 
   return (
@@ -87,9 +104,14 @@ export default function GalleryPage() {
             </div>
           ) : (
             <div className="text-center py-12 md:py-20">
-              <div className="text-5xl md:text-7xl mb-4">�</div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">No Gallery Images Available</h2>
-              <p className="text-base md:text-lg text-slate-600">Gallery images will be displayed here when available.</p>
+              <div className="text-6xl mb-4">📸</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Gallery Images Available</h3>
+              <p className="text-gray-600 mb-4">
+                Photo gallery showcasing our work and achievements will appear here.
+              </p>
+              <div className="text-sm text-gray-500">
+                💡 We are building our visual story collection.
+              </div>
             </div>
           )}
         </div>

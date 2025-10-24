@@ -98,7 +98,16 @@ export default async function TeamPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No team members yet. Add one above!</p>
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">👥</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Team Members</h3>
+                <p className="text-gray-600 mb-4">
+                  Build your team profile by adding team members with their roles and photos.
+                </p>
+                <div className="text-sm text-gray-500">
+                  💡 Tip: Add key team members to build trust and showcase your expertise.
+                </div>
+              </div>
             )}
           </div>
         </div>
