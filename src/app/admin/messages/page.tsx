@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
-import { updateContactMessageStatus, deleteContactMessage } from "@/app/actions";
+'use client';
+
+import { useEffect, useState } from 'react';
 
 type ContactMessageModel = {
   id: number;
@@ -12,14 +13,69 @@ type ContactMessageModel = {
   createdAt: string | Date;
 };
 
-export const metadata = {
-  title: "Contact Messages | Admin",
-};
+export default function MessagesPage() {
+  const [messages, setMessages] = useState<ContactMessageModel[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function MessagesPage() {
-  const messages = await prisma.contactMessage.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch('/api/messages');
+      const result = await response.json();
+      if (result.success) {
+        setMessages(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleStatusChange = async (id: number, status: string) => {
+    try {
+      const response = await fetch('/api/messages', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      });
+      
+      if (response.ok) {
+        fetchMessages(); // Refresh the list
+      }
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this message?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/messages?id=${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (response.ok) {
+        fetchMessages(); // Refresh the list
+      }
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-xl">Loading messages...</div>
+      </div>
+    );
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -75,13 +131,7 @@ export default async function MessagesPage() {
                     <td className="px-6 py-4">
                       <select
                         defaultValue={msg.status}
-                        onChange={async (e) => {
-                          "use server";
-                          await updateContactMessageStatus(
-                            msg.id,
-                            e.target.value as "pending" | "read" | "replied"
-                          );
-                        }}
+                        onChange={(e) => handleStatusChange(msg.id, e.target.value)}
                         className={`px-3 py-1 text-xs font-semibold rounded ${getStatusColor(
                           msg.status
                         )} border-0 cursor-pointer`}
@@ -93,10 +143,7 @@ export default async function MessagesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <button
-                        onClick={async () => {
-                          "use server";
-                          await deleteContactMessage(msg.id);
-                        }}
+                        onClick={() => handleDelete(msg.id)}
                         className="px-3 py-1 bg-red-500 text-white text-xs font-medium rounded hover:bg-red-600 transition"
                       >
                         Delete

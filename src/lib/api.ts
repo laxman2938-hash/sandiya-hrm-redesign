@@ -20,6 +20,27 @@ export const api = new Proxy({} as any, {
       };
     }
 
+    // Handle specific methods
+    if (prop === 'submitContactForm') {
+      return async (data: any) => {
+        try {
+          const response = await fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.message || 'Failed to submit form');
+          }
+          return result;
+        } catch (error) {
+          console.error('API Error:', error);
+          throw error;
+        }
+      };
+    }
+
     // Handle any other method call (e.g., api.getAchievements())
     return async () => {
       try {
