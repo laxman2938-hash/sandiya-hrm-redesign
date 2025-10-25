@@ -126,7 +126,7 @@ export default function ClientsPage() {
             <div className="order-2 md:order-1">
               <span className="inline-block text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-2 md:mb-4">Strategic Partnerships</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-slate-900">Why Partner With Us?</h2>
-              <p className="text-sm md:text-lg text-slate-700 mb-4 md:mb-6 leading-relaxed">
+              <p className="text-sm md:text-lg text-slate-700 mb-4 md:mb-6 leading-relaxed text-justify">
                 We have established trusted partnerships with leading organizations across multiple industries. Our clients value our commitment to excellence, reliability, and delivering top-tier talent.
               </p>
               <div className="space-y-3 md:space-y-4">

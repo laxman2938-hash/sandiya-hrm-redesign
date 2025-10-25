@@ -59,10 +59,10 @@ export default function AboutUsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-3xl font-bold mb-6 text-blue-600">We believe investing in people is our strength and asset.</h3>
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
+              <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
                 Alongside providing better employment opportunities for individuals seeking to work abroad, we take pride in the strong and supportive culture we have built at Sandiya Human Resources Pvt. Ltd. This culture reflects the vision and leadership of our team, which brings over 10 years of experience across various industries.
               </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed text-justify">
                 Many of our team members have been with us since the company's inception—a testament to the positive work environment and values fostered by our leadership.
               </p>
             </div>
@@ -165,7 +165,7 @@ export default function AboutUsPage() {
           </div>
 
           <div className="bg-linear-to-br from-slate-50 to-blue-50 border-2 border-blue-100 rounded-2xl p-8 md:p-12">
-            <p className="text-lg text-slate-700 leading-relaxed mb-8">
+            <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
               Through our philanthropic initiatives, we strive to empower communities and create a meaningful, positive impact. Our internally driven and community-focused campaigns reflect our commitment to being a socially responsible organization.
             </p>
 

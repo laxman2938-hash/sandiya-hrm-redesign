@@ -106,7 +106,7 @@ export default function OurProcessPage() {
       {/* Process Overview */}
       <section className="py-8 sm:py-10 md:py-12 px-4 bg-linear-to-r from-blue-50 to-indigo-50">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-sm sm:text-base md:text-lg text-slate-700 mb-4 sm:mb-6 md:mb-8 px-2">
+          <p className="text-sm sm:text-base md:text-lg text-slate-700 mb-4 sm:mb-6 md:mb-8 px-2 text-justify">
             From initial application to successful deployment, our proven process ensures excellent placements
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 flex-wrap text-xs sm:text-sm md:text-base text-slate-600 px-2">
@@ -152,7 +152,7 @@ export default function OurProcessPage() {
                         </div>
                       </div>
                     </div>
-                    <p className="text-slate-700 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">{item.description}</p>
+                    <p className="text-slate-700 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm md:text-base text-justify">{item.description}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                       {item.details.map((detail, i) => (
                         <div key={i} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-700">
@@ -185,7 +185,7 @@ export default function OurProcessPage() {
               >
                 <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{highlight.icon}</div>
                 <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-slate-900">{highlight.title}</h3>
-                <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">{highlight.description}</p>
+                <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed text-justify">{highlight.description}</p>
               </div>
             ))}
           </div>

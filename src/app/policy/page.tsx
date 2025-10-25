@@ -120,7 +120,7 @@ export default function PolicyPage() {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-slate-900">Policy Commitments</h2>
-          <p className="text-lg text-slate-700 leading-relaxed mb-4">
+          <p className="text-lg text-slate-700 leading-relaxed mb-4 text-justify">
             Sandiya Human Resources Pvt. Ltd. is committed to integrating the Responsible Recruitment Pillars and Standards outlined below into all aspects of our operations and supply chains.
           </p>
         </div>
@@ -139,7 +139,7 @@ export default function PolicyPage() {
               >
                 <div className="flex items-start gap-4">
                   <span className="text-blue-600 text-2xl font-bold shrink-0 mt-1">•</span>
-                  <p className="text-slate-700 leading-relaxed text-lg">{pillar.point}</p>
+                  <p className="text-slate-700 leading-relaxed text-lg text-justify">{pillar.point}</p>
                 </div>
               </div>
             ))}
@@ -162,7 +162,7 @@ export default function PolicyPage() {
                   <span className="text-blue-600 text-2xl">✓</span>
                   {standard.title}
                 </h4>
-                <p className="text-slate-700 leading-relaxed">{standard.description}</p>
+                <p className="text-slate-700 leading-relaxed text-justify">{standard.description}</p>
               </div>
             ))}
           </div>
@@ -177,7 +177,7 @@ export default function PolicyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white border border-blue-100 rounded-lg p-8 shadow-md">
               <h3 className="text-2xl font-bold mb-4 text-slate-900">About Us</h3>
-              <p className="text-slate-700 mb-6">
+              <p className="text-slate-700 mb-6 text-justify">
                 Sandiya Human Resources Pvt. Ltd. offers zero-cost recruitment services to empower candidates to join the global workforce while connecting the right talent with the right job.
               </p>
               <a href="/about-us" className="inline-block text-blue-600 font-bold hover:text-blue-700 transition">

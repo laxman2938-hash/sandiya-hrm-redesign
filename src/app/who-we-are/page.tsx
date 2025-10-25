@@ -54,7 +54,7 @@ export default function WhoWeArePage() {
                 className="bg-linear-to-br from-blue-50 to-indigo-50 p-12 rounded-2xl border-l-4 border-blue-600 hover:shadow-lg transition"
               >
                 <h3 className="text-2xl font-bold mb-4 text-blue-900">{mission.title}</h3>
-                <p className="text-slate-700 leading-relaxed">{mission.description}</p>
+                <p className="text-slate-700 leading-relaxed text-justify">{mission.description}</p>
               </div>
             ))}
           </div>
@@ -67,13 +67,13 @@ export default function WhoWeArePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-6 text-slate-900">Leading foreign recruitment agency</h2>
-              <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+              <p className="text-lg text-slate-700 mb-6 leading-relaxed text-justify">
                 Sandiya Human Resources Pvt. Ltd. offers zero-cost recruitment services to empower candidates to join the global workforce while connecting the right talent with the right job.
               </p>
-              <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+              <p className="text-lg text-slate-700 mb-6 leading-relaxed text-justify">
                 We have built a strong reputation in the recruitment industry through our commitment to fair practices. We follow a zero-cost recruitment policy, ensuring candidates can join the global workforce without financial barriers.
               </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed text-justify">
                 Our mission is to connect the right people with the right opportunities, enabling individuals to reach their full potential while delivering outstanding results for organizations worldwide.
               </p>
             </div>

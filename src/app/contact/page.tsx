@@ -51,7 +51,7 @@ export default function ContactPage() {
               📞 Get in Touch
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 leading-tight">Get in Touch</h1>
-            <p className="text-sm sm:text-base md:text-xl text-blue-100 max-w-2xl mx-auto px-2">We're here to help and answer any question you might have. Reach out to us anytime!</p>
+            <p className="text-sm sm:text-base md:text-xl text-blue-100 max-w-2xl mx-auto px-2 text-justify">We're here to help and answer any question you might have. Reach out to us anytime!</p>
           </div>
         </div>
       </section>
@@ -89,7 +89,7 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 text-slate-900">Find Us on the Map</h2>
-            <p className="text-sm sm:text-base md:text-xl text-slate-600 px-2">Visit our office location in Dhumbarahi, Kathmandu</p>
+            <p className="text-sm sm:text-base md:text-xl text-slate-600 px-2 text-justify">Visit our office location in Dhumbarahi, Kathmandu</p>
           </div>
           
           <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-lg md:shadow-2xl border border-blue-100 mb-8 sm:mb-10 md:mb-12">
@@ -147,7 +147,7 @@ export default function ContactPage() {
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <span className="inline-block text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-3 md:mb-4">Contact Form</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 text-slate-900">Send us a Message</h2>
-            <p className="text-sm sm:text-base md:text-lg text-slate-600 px-2">Fill out the form below and we'll get back to you as soon as possible</p>
+            <p className="text-sm sm:text-base md:text-lg text-slate-600 px-2 text-justify">Fill out the form below and we'll get back to you as soon as possible</p>
           </div>
 
           {message && (

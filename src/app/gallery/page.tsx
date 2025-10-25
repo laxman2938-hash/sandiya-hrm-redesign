@@ -99,7 +99,7 @@ export default function GalleryPage() {
               </div>
               
               <div className="space-y-4 mb-8">
-                <p className="text-base md:text-lg text-slate-700 leading-relaxed">
+                <p className="text-base md:text-lg text-slate-700 leading-relaxed text-justify">
                   At Sandiya HR, we are committed to ethical recruitment practices and strictly prohibit any form of forced or bonded labor. We believe every individual deserves dignity, freedom, and fair treatment.
                 </p>
                 

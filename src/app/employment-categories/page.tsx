@@ -78,7 +78,7 @@ export default function EmploymentCategoriesPage() {
 
                 {/* Title and Description */}
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">{category.title}</h3>
-                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                <p className="text-slate-600 text-base leading-relaxed mb-6 text-justify">
                   {category.description}
                 </p>
 
@@ -93,7 +93,7 @@ export default function EmploymentCategoriesPage() {
       <section className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-slate-900">Choose What Works For You</h2>
-          <p className="text-center text-slate-600 text-lg mb-12 max-w-2xl mx-auto">
+          <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto text-justify">
             Each employment category offers unique benefits and flexibility. Select the option that aligns best with your career aspirations.
           </p>
 
@@ -110,7 +110,7 @@ export default function EmploymentCategoriesPage() {
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 mb-2">{category.title}</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed text-justify">
                     {category.description}
                   </p>
                 </div>
