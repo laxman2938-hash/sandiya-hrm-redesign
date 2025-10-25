@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
     "/api/**/*": ["./node_modules/.prisma/client/**/*"],
     "/admin/**/*": ["./node_modules/.prisma/client/**/*"],
   },
+  turbopack: {
+    root: ".",
+  },
 };
 
 export default nextConfig;

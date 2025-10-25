@@ -3,6 +3,23 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate environment variables
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('❌ Missing Supabase credentials');
+      console.error('NEXT_PUBLIC_SUPABASE_URL:', supabaseUrl ? '✓' : '✗');
+      console.error('SUPABASE_SERVICE_ROLE_KEY:', supabaseServiceKey ? '✓' : '✗');
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Server configuration error: Supabase credentials not set. Please contact administrator.' 
+        },
+        { status: 500 }
+      );
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const filePath = formData.get('filePath') as string;
@@ -22,10 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Initialize Supabase client
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-    );
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Convert File to Buffer
     const arrayBuffer = await file.arrayBuffer();
@@ -61,8 +75,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('❌ Upload API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, message: 'Failed to upload file' },
+      { success: false, message: `Server error: ${errorMessage}` },
       { status: 500 }
     );
   }
