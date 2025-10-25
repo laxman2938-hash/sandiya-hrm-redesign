@@ -102,3 +102,22 @@ model Testimonial {
 
   @@map("testimonials")
 }
+
+// Candidate Submissions
+model CandidateSubmission {
+  id                    Int      @id @default(autoincrement())
+  firstName             String
+  lastName              String
+  email                 String
+  phone                 String
+  areaOfInterest        String   // e.g., "Cleaner", "Security Guard", "Nurse"
+  passportUrl           String   // URL to uploaded passport
+  experienceCertificateUrl String? // URL to uploaded experience certificate
+  additionalDocuments   String? @db.Text // JSON array of additional document URLs
+  status                String   @default("pending") // pending, reviewed, shortlisted, rejected
+  notes                 String?  @db.Text // Admin notes
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("candidate_submissions")
+}

@@ -27,6 +27,7 @@ export default function Navbar() {
       { label: 'Active Demand Letter', href: '/active-demand-letter' },
       { label: 'Legal Documents', href: '/legal-documents' },
     ]},
+    { label: 'Apply as Candidate', href: '/candidates' },
   ];
 
   return (
