@@ -143,7 +143,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-xs text-slate-400 mb-1">EMAIL US</p>
-                  <p className="text-sm text-white font-semibold break-all">sandiyahr17@gmail.com</p>
+                  <p className="text-sm text-white font-semibold break-all">info@sandiyahr.com.np</p>
                 </div>
               </div>
 

@@ -189,7 +189,7 @@ export default function PolicyPage() {
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Contact Info</h3>
               <div className="space-y-3 text-slate-700">
                 <p><strong>CALL:</strong> +977 014374161</p>
-                <p><strong>WRITE:</strong> sandiyahr17@gmail.com</p>
+                <p><strong>WRITE:</strong> info@sandiyahr.com.np</p>
                 <p><strong>FIND US:</strong> Dhumbarahi, Kathmandu</p>
               </div>
               <a href="/contact" className="inline-block text-blue-600 font-bold hover:text-blue-700 transition mt-4">

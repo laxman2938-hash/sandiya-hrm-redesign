@@ -70,7 +70,7 @@ export default function ContactPage() {
             <div className="group bg-linear-to-br from-slate-50 to-blue-50 p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-blue-100 text-center hover:shadow-xl transition transform hover:-translate-y-1">
               <div className="text-5xl sm:text-6xl mb-3 sm:mb-4 transform group-hover:scale-110 transition">✉️</div>
               <h3 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 text-slate-900">Email Us</h3>
-              <p className="text-slate-600 text-base sm:text-lg font-semibold mb-1 break-all">sandiyahr17@gmail.com</p>
+              <p className="text-slate-600 text-base sm:text-lg font-semibold mb-1 break-all">info@sandiyahr.com.np</p>
               <p className="text-slate-500 text-xs sm:text-sm">We'll respond within 24 hours</p>
             </div>
 
@@ -129,7 +129,7 @@ export default function ContactPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-600 font-bold shrink-0">•</span>
-                  <a href="mailto:sandiyahr17@gmail.com" className="hover:text-blue-600 transition break-all">sandiyahr17@gmail.com</a>
+                  <a href="mailto:info@sandiyahr.com.np" className="hover:text-blue-600 transition break-all">info@sandiyahr.com.np</a>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-600 font-bold shrink-0">•</span>

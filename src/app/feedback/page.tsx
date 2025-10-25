@@ -303,7 +303,7 @@ export default function FeedbackPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               { icon: '📞', title: 'Call Us', contact: '+977 014374161', desc: 'Sun-Fri, 10 AM - 6 PM' },
-              { icon: '📧', title: 'Email Us', contact: 'sandiyahr17@gmail.com', desc: 'Response within 24 hours' },
+              { icon: '📧', title: 'Email Us', contact: 'info@sandiyahr.com.np', desc: 'Response within 24 hours' },
               { icon: '💬', title: 'WhatsApp', contact: '+977 9841XXXXXX', desc: 'Quick response' },
             ].map((item, idx) => (
               <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200 shadow-md text-center">

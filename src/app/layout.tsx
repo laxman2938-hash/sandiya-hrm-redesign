@@ -94,7 +94,7 @@ export default async function RootLayout({
               description: 'Ethical recruitment agency offering zero-cost services',
               url: 'https://sandiyahrm.com',
               telephone: '+977-14374161',
-              email: 'sandiyahr17@gmail.com',
+              email: 'info@sandiyahr.com.np',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: 'Dhumbarahi',
@@ -134,7 +134,7 @@ export default async function RootLayout({
                 '@type': 'ContactPoint',
                 contactType: 'Customer Service',
                 telephone: '+977-14374161',
-                email: 'sandiyahr17@gmail.com',
+                email: 'info@sandiyahr.com.np',
                 areaServed: ['NP', 'US', 'UK', 'AUS', 'NZ']
               }
             })
