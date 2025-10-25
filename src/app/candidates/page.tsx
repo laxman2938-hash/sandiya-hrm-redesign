@@ -50,9 +50,15 @@ export default function CandidatesPage() {
   };
 
   const uploadToCloudinary = async (file: File): Promise<string> => {
+    // IMPORTANT: You need to create an unsigned upload preset in Cloudinary:
+    // 1. Go to https://cloudinary.com/console/settings/upload
+    // 2. Create a new unsigned preset named "sandiya_hrm"
+    // 3. Enable "Auto-tag" and set folder to "sandiya-hr/candidates"
+    
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'sandiya_hrm'); // You'll need to create this preset in Cloudinary
+    formData.append('upload_preset', 'sandiya_hrm');
+    formData.append('folder', 'sandiya-hr/candidates');
 
     try {
       const response = await fetch('https://api.cloudinary.com/v1_1/doyxw0n4a/auto/upload', {
@@ -60,14 +66,21 @@ export default function CandidatesPage() {
         body: formData,
       });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Cloudinary error:', errorData);
+        throw new Error(`Cloudinary: ${errorData.error?.message || response.statusText}`);
+      }
+
       const data = await response.json();
       if (data.secure_url) {
+        console.log('✅ File uploaded successfully:', data.secure_url);
         return data.secure_url;
       }
-      throw new Error('Upload failed');
+      throw new Error('No secure URL in Cloudinary response');
     } catch (error) {
-      console.error('File upload error:', error);
-      throw new Error('Failed to upload file');
+      console.error('❌ File upload error:', error);
+      throw error;
     }
   };
 
@@ -124,7 +137,8 @@ export default function CandidatesPage() {
         setMessage({ type: 'error', text: result.message || 'Error submitting application' });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'Error submitting application. Please try again.' });
+      const errorMessage = error instanceof Error ? error.message : 'Error submitting application. Please try again.';
+      setMessage({ type: 'error', text: `❌ ${errorMessage}` });
       console.error('Error:', error);
     } finally {
       setLoading(false);
