@@ -28,6 +28,7 @@ export default function Navbar() {
       { label: 'Legal Documents', href: '/legal-documents' },
     ]},
     { label: 'Apply as Candidate', href: '/candidates' },
+    { label: 'Feedback', href: '/feedback' },
   ];
 
   return (
