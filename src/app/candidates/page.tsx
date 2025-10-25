@@ -49,35 +49,34 @@ export default function CandidatesPage() {
     }
   };
 
-  const uploadToCloudinary = async (file: File): Promise<string> => {
-    // IMPORTANT: You need to create an unsigned upload preset in Cloudinary:
-    // 1. Go to https://cloudinary.com/console/settings/upload
-    // 2. Create a new unsigned preset named "sandiya_hrm"
-    // 3. Enable "Auto-tag" and set folder to "sandiya-hr/candidates"
-    
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'sandiya_hrm');
-    formData.append('folder', 'sandiya-hr/candidates');
-
+  const uploadToSupabase = async (file: File): Promise<string> => {
     try {
-      const response = await fetch('https://api.cloudinary.com/v1_1/doyxw0n4a/auto/upload', {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `candidates/${fileName}`;
+
+      // Create FormData for the API route
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('filePath', filePath);
+
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Cloudinary error:', errorData);
-        throw new Error(`Cloudinary: ${errorData.error?.message || response.statusText}`);
+        console.error('Supabase upload error:', errorData);
+        throw new Error(`Upload failed: ${errorData.message || response.statusText}`);
       }
 
       const data = await response.json();
-      if (data.secure_url) {
-        console.log('✅ File uploaded successfully:', data.secure_url);
-        return data.secure_url;
+      if (data.url) {
+        console.log('✅ File uploaded to Supabase:', data.url);
+        return data.url;
       }
-      throw new Error('No secure URL in Cloudinary response');
+      throw new Error('No URL in response');
     } catch (error) {
       console.error('❌ File upload error:', error);
       throw error;
@@ -96,12 +95,12 @@ export default function CandidatesPage() {
       setLoading(true);
       setMessage(null);
 
-      // Upload files to Cloudinary
-      const passportUrl = await uploadToCloudinary(files.passport);
+      // Upload files to Supabase Storage
+      const passportUrl = await uploadToSupabase(files.passport);
       let experienceCertificateUrl = '';
 
       if (files.experience) {
-        experienceCertificateUrl = await uploadToCloudinary(files.experience);
+        experienceCertificateUrl = await uploadToSupabase(files.experience);
       }
 
       // Submit form with file URLs
