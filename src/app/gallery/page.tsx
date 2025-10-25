@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { GalleryImage } from '@/types';
 import { getMultilingualText } from '@/lib/utils';
 
@@ -84,6 +85,108 @@ export default function GalleryPage() {
 
       {/* Category Filter */}
       <section className="py-0 px-4 bg-white border-b border-blue-100">
+      </section>
+
+      {/* No Forced Bonded Labor Section */}
+      <section className="py-12 md:py-20 px-4 bg-linear-to-r from-green-50 via-emerald-50 to-green-50 border-y-2 border-green-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left: Content */}
+            <div className="order-2 md:order-1">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-5xl">🚫</div>
+                <h2 className="text-3xl md:text-4xl font-bold text-green-900">No Forced Bonded Labor</h2>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <p className="text-base md:text-lg text-slate-700 leading-relaxed">
+                  At Sandiya HR, we are committed to ethical recruitment practices and strictly prohibit any form of forced or bonded labor. We believe every individual deserves dignity, freedom, and fair treatment.
+                </p>
+                
+                <div className="bg-white p-6 rounded-lg border-l-4 border-green-600 shadow-sm">
+                  <h3 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <span className="text-xl">✓</span> Our Commitment
+                  </h3>
+                  <ul className="space-y-2 text-sm md:text-base text-slate-700">
+                    <li>✓ Zero tolerance for forced or bonded labor</li>
+                    <li>✓ Fair wages and working conditions</li>
+                    <li>✓ Freedom of association and movement</li>
+                    <li>✓ Transparent employment contracts</li>
+                    <li>✓ Regular compliance audits</li>
+                    <li>✓ Confidential reporting mechanism</li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-100 p-4 rounded-lg border border-green-300">
+                  <p className="text-sm md:text-base text-green-900 font-semibold">
+                    💼 All our candidates are placed with proper legal documentation and protection under international labor laws.
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                href="/policy"
+                className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-lg transition transform hover:scale-105"
+              >
+                <span>Read Our Policy</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Right: Visual Badge */}
+            <div className="order-1 md:order-2 flex justify-center items-center">
+              <div className="relative w-full max-w-sm">
+                <div className="absolute inset-0 bg-linear-to-br from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-30"></div>
+                <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-green-200 text-center">
+                  <div className="text-7xl md:text-8xl mb-4">🌍</div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-green-900 mb-4">Ethical Recruitment</h3>
+                  <p className="text-slate-700 mb-6 text-sm md:text-base">
+                    Fair, Transparent & Compliant with International Labor Standards
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-center gap-2 text-green-700 font-semibold">
+                      <span className="text-2xl">✓</span>
+                      <span>ILO Convention Compliant</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-green-700 font-semibold">
+                      <span className="text-2xl">✓</span>
+                      <span>Zero Cost Policy</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-green-700 font-semibold">
+                      <span className="text-2xl">✓</span>
+                      <span>Full Legal Protection</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Stats */}
+      <section className="py-12 md:py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Our Impact & Values</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { number: '10,000+', label: 'Workers Protected', icon: '👥' },
+              { number: '100%', label: 'Legal Compliance', icon: '✓' },
+              { number: '0', label: 'Forced Labor Cases', icon: '🚫' },
+              { number: '50+', label: 'Countries Served', icon: '🌍' },
+            ].map((stat, idx) => (
+              <div key={idx} className="text-center p-6 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-lg transition">
+                <div className="text-5xl mb-3">{stat.icon}</div>
+                <p className="text-3xl md:text-4xl font-bold text-green-700 mb-2">{stat.number}</p>
+                <p className="text-slate-700 font-semibold">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Gallery Grid - Advanced Responsive */}
