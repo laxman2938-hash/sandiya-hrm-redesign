@@ -64,6 +64,8 @@ export default function ContactPage() {
               <div className="text-5xl sm:text-6xl mb-3 sm:mb-4 transform group-hover:scale-110 transition">📞</div>
               <h3 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 text-slate-900">Call Us</h3>
               <p className="text-slate-600 text-base sm:text-lg font-semibold mb-1">+977 014374161</p>
+              <p className="text-slate-600 text-base sm:text-lg font-semibold mb-1">+977 9843391036</p>
+              <p className="text-slate-600 text-base sm:text-lg font-semibold mb-3">+977 9801255090</p>
               <p className="text-slate-500 text-xs sm:text-sm">Sun - Fri 10:00 AM - 6:00 PM</p>
             </div>
 
@@ -125,7 +127,27 @@ export default function ContactPage() {
               <ul className="space-y-2 sm:space-y-3 text-slate-700 text-sm sm:text-base">
                 <li className="flex items-start gap-3">
                   <span className="text-blue-600 font-bold shrink-0">•</span>
-                  <a href="tel:+977014374161" className="hover:text-blue-600 transition break-all">+977 014374161</a>
+                  <a href="tel:+977014374161" className="hover:text-blue-600 transition break-all">📞 +977 014374161</a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 font-bold shrink-0">•</span>
+                  <a href="tel:+9779843391036" className="hover:text-blue-600 transition break-all">📞 +977 9843391036</a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 font-bold shrink-0">•</span>
+                  <a href="tel:+9779801255090" className="hover:text-blue-600 transition break-all">📞 +977 9801255090</a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold shrink-0">•</span>
+                  <a href="https://wa.me/9779843391036" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition break-all flex items-center gap-2">
+                    <span>🟢 WhatsApp: +977 9843391036</span>
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold shrink-0">•</span>
+                  <a href="https://wa.me/9779801255090" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition break-all flex items-center gap-2">
+                    <span>🟢 WhatsApp: +977 9801255090</span>
+                  </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-blue-600 font-bold shrink-0">•</span>

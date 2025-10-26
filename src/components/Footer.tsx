@@ -132,6 +132,8 @@ export default function Footer() {
                 <div>
                   <p className="text-xs text-slate-400 mb-1">CALL US</p>
                   <p className="text-sm text-white font-semibold">+977 014374161</p>
+                  <p className="text-sm text-white font-semibold">+977 9843391036</p>
+                  <p className="text-sm text-white font-semibold">+977 9801255090</p>
                 </div>
               </div>
 
@@ -163,6 +165,28 @@ export default function Footer() {
               <div className="bg-linear-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-lg p-4 mt-6">
                 <p className="text-xs text-blue-300 font-semibold mb-1">WORKING HOURS</p>
                 <p className="text-sm font-bold text-white">Sun - Fri: 10:00 AM - 6:00 PM</p>
+              </div>
+
+              <div className="bg-linear-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-lg p-4 mt-4">
+                <p className="text-xs text-green-300 font-semibold mb-3">WHATSAPP US</p>
+                <div className="flex flex-col gap-2">
+                  <a 
+                    href="https://wa.me/9779843391036" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm font-bold text-white hover:text-green-300 transition flex items-center gap-2"
+                  >
+                    <span>🟢</span> +977 9843391036
+                  </a>
+                  <a 
+                    href="https://wa.me/9779801255090" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm font-bold text-white hover:text-green-300 transition flex items-center gap-2"
+                  >
+                    <span>🟢</span> +977 9801255090
+                  </a>
+                </div>
               </div>
             </div>
           </div>
