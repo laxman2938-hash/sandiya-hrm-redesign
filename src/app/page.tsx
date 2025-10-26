@@ -358,14 +358,7 @@ export default function Home() {
                   <p className="text-sm md:text-base font-semibold text-blue-300 mb-2 uppercase tracking-wide">Saturday</p>
                   <p className="text-2xl md:text-4xl font-bold text-white">Closed</p>
                 </div>
-                <div className="bg-linear-to-br from-green-600/30 to-emerald-600/20 backdrop-blur-md border border-green-400/30 rounded-xl p-6 hover:bg-green-600/40 transition group">
-                  <p className="text-sm md:text-base font-semibold text-green-300 mb-3 uppercase tracking-wide">📞 Contact Us</p>
-                  <div className="space-y-2">
-                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+977014374161" className="hover:text-green-200 transition">+977 014374161</a></p>
-                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+9779843391036" className="hover:text-green-200 transition">+977 9843391036</a></p>
-                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+9779801255090" className="hover:text-green-200 transition">+977 9801255090</a></p>
-                  </div>
-                </div>
+             
               </div>
 
               <Link
