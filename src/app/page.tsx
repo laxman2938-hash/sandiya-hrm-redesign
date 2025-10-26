@@ -358,6 +358,14 @@ export default function Home() {
                   <p className="text-sm md:text-base font-semibold text-blue-300 mb-2 uppercase tracking-wide">Saturday</p>
                   <p className="text-2xl md:text-4xl font-bold text-white">Closed</p>
                 </div>
+                <div className="bg-linear-to-br from-green-600/30 to-emerald-600/20 backdrop-blur-md border border-green-400/30 rounded-xl p-6 hover:bg-green-600/40 transition group">
+                  <p className="text-sm md:text-base font-semibold text-green-300 mb-3 uppercase tracking-wide">📞 Contact Us</p>
+                  <div className="space-y-2">
+                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+977014374161" className="hover:text-green-200 transition">+977 014374161</a></p>
+                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+9779843391036" className="hover:text-green-200 transition">+977 9843391036</a></p>
+                    <p className="text-lg md:text-xl font-bold text-white"><a href="tel:+9779801255090" className="hover:text-green-200 transition">+977 9801255090</a></p>
+                  </div>
+                </div>
               </div>
 
               <Link
@@ -373,14 +381,16 @@ export default function Home() {
               <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 hover:bg-white/15 transition transform hover:scale-105 hover:-translate-y-2 group">
                 <div className="text-4xl md:text-5xl mb-4 transform group-hover:scale-125 transition shrink-0">📞</div>
                 <p className="text-sm text-blue-300 uppercase font-semibold mb-2">Call Us</p>
-                <p className="text-lg md:text-2xl font-bold text-white mb-2">+977 014374161</p>
+                <p className="text-lg md:text-2xl font-bold text-white mb-1">+977 014374161</p>
+                <p className="text-lg md:text-2xl font-bold text-white mb-1">+977 9843391036</p>
+                <p className="text-lg md:text-2xl font-bold text-white mb-2">+977 9801255090</p>
                 <p className="text-sm text-blue-100">Available during working hours</p>
               </div>
 
               <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 hover:bg-white/15 transition transform hover:scale-105 hover:-translate-y-2 group">
                 <div className="text-4xl md:text-5xl mb-4 transform group-hover:scale-125 transition">✉️</div>
                 <p className="text-sm text-blue-300 uppercase font-semibold mb-2">Email Us</p>
-                <p className="text-lg md:text-2xl font-bold text-white mb-2 break-all">sandiyahr17@gmail.com</p>
+                <p className="text-lg md:text-2xl font-bold text-white mb-2 break-all">info@sandiyahr.com.np</p>
                 <p className="text-sm text-blue-100">We'll respond within 24 hours</p>
               </div>
 
