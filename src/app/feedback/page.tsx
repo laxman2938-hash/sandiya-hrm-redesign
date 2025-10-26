@@ -300,19 +300,43 @@ export default function FeedbackPage() {
             <p className="text-slate-600 mt-2">Contact us directly through any of these channels</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { icon: '📞', title: 'Call Us', contact: '+977 014374161', desc: 'Sun-Fri, 10 AM - 6 PM' },
-              { icon: '📧', title: 'Email Us', contact: 'info@sandiyahr.com.np', desc: 'Response within 24 hours' },
-              { icon: '💬', title: 'WhatsApp', contact: '+977 9841XXXXXX', desc: 'Quick response' },
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200 shadow-md text-center">
-                <div className="text-4xl mb-3">{item.icon}</div>
-                <h3 className="font-bold text-slate-900 mb-1">{item.title}</h3>
-                <p className="text-blue-600 font-semibold mb-2">{item.contact}</p>
-                <p className="text-xs text-slate-600">{item.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-md text-center">
+              <div className="text-4xl mb-3">📞</div>
+              <h3 className="font-bold text-slate-900 mb-3">Call Us</h3>
+              <div className="space-y-2">
+                <p className="text-blue-600 font-semibold"><a href="tel:+977014374161" className="hover:underline">+977 014374161</a></p>
+                <p className="text-blue-600 font-semibold"><a href="tel:+9779843391036" className="hover:underline">+977 9843391036</a></p>
+                <p className="text-blue-600 font-semibold"><a href="tel:+9779801255090" className="hover:underline">+977 9801255090</a></p>
               </div>
-            ))}
+              <p className="text-xs text-slate-600 mt-3">Sun-Fri, 10 AM - 6 PM</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-md text-center">
+              <div className="text-4xl mb-3">📧</div>
+              <h3 className="font-bold text-slate-900 mb-1">Email Us</h3>
+              <p className="text-blue-600 font-semibold break-all mb-2">
+                <a href="mailto:info@sandiyahr.com.np" className="hover:underline">info@sandiyahr.com.np</a>
+              </p>
+              <p className="text-xs text-slate-600">Response within 24 hours</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-md text-center">
+              <div className="text-4xl mb-3">🟢</div>
+              <h3 className="font-bold text-slate-900 mb-3">WhatsApp</h3>
+              <div className="space-y-2">
+                <p><a href="https://wa.me/9779843391036" target="_blank" rel="noopener noreferrer" className="text-green-600 font-semibold hover:underline">+977 9843391036</a></p>
+                <p><a href="https://wa.me/9779801255090" target="_blank" rel="noopener noreferrer" className="text-green-600 font-semibold hover:underline">+977 9801255090</a></p>
+              </div>
+              <p className="text-xs text-slate-600 mt-3">Quick response</p>
+            </div>
+
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 shadow-md text-center">
+              <div className="text-4xl mb-3">📍</div>
+              <h3 className="font-bold text-slate-900 mb-1">Visit Us</h3>
+              <p className="text-blue-600 font-semibold mb-2">Dhumbarahi, Kathmandu</p>
+              <p className="text-xs text-slate-600">Nepal</p>
+            </div>
           </div>
         </div>
       </section>
