@@ -42,29 +42,9 @@ export default function CandidatesPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files: fileList } = e.target;
     if (fileList && fileList[0]) {
-      const file = fileList[0];
-      
-      // Validate file size (10MB limit)
-      if (file.size > 10 * 1024 * 1024) {
-        setMessage({ type: 'error', text: `File "${file.name}" is too large. Please select a file under 10MB.` });
-        e.target.value = ''; // Clear the input
-        return;
-      }
-
-      // Validate file type
-      const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
-      if (!allowedTypes.includes(file.type.toLowerCase())) {
-        setMessage({ type: 'error', text: `File "${file.name}" is not supported. Please upload PDF, JPG, or PNG files only.` });
-        e.target.value = ''; // Clear the input
-        return;
-      }
-
-      // Clear any previous error messages
-      setMessage(null);
-      
       setFiles((prev) => ({
         ...prev,
-        [name]: file,
+        [name]: fileList[0],
       }));
     }
   };

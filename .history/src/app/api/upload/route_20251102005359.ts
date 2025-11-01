@@ -68,23 +68,17 @@ export async function POST(request: NextRequest) {
     const random = Math.random().toString(36).substring(7);
     const publicId = `${folder}/${timestamp}_${random}`;
 
-    // Determine resource type based on file type
-    const resourceType = file.type === 'application/pdf' ? 'raw' : 'image';
-    
     // Convert buffer to stream and upload to Cloudinary
     const uploadPromise = new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          resource_type: resourceType,
+          resource_type: 'image',
           public_id: publicId,
           folder: `sandiya-hr/${folder}`,
-          // Only add transformations for images
-          ...(resourceType === 'image' && {
-            transformation: [
-              { quality: 'auto' },
-              { fetch_format: 'auto' }
-            ]
-          })
+          transformation: [
+            { quality: 'auto' },
+            { fetch_format: 'auto' }
+          ]
         },
         (error, result) => {
           if (error) {

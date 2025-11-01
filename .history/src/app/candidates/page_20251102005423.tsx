@@ -42,29 +42,9 @@ export default function CandidatesPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files: fileList } = e.target;
     if (fileList && fileList[0]) {
-      const file = fileList[0];
-      
-      // Validate file size (10MB limit)
-      if (file.size > 10 * 1024 * 1024) {
-        setMessage({ type: 'error', text: `File "${file.name}" is too large. Please select a file under 10MB.` });
-        e.target.value = ''; // Clear the input
-        return;
-      }
-
-      // Validate file type
-      const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
-      if (!allowedTypes.includes(file.type.toLowerCase())) {
-        setMessage({ type: 'error', text: `File "${file.name}" is not supported. Please upload PDF, JPG, or PNG files only.` });
-        e.target.value = ''; // Clear the input
-        return;
-      }
-
-      // Clear any previous error messages
-      setMessage(null);
-      
       setFiles((prev) => ({
         ...prev,
-        [name]: file,
+        [name]: fileList[0],
       }));
     }
   };
@@ -321,27 +301,11 @@ export default function CandidatesPage() {
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <div className="text-center">
-                    <div className="text-3xl mb-2">
-                      {files.experience ? 
-                        (files.experience.type === 'application/pdf' ? '📋' : '🎓') 
-                        : '🎓'
-                      }
-                    </div>
+                    <div className="text-3xl mb-2">🎓</div>
                     <p className="text-sm font-semibold text-slate-700 group-hover:text-blue-600">
-                      {files.experience ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <span className={`px-2 py-1 rounded text-xs font-bold ${
-                            files.experience.type === 'application/pdf' 
-                              ? 'bg-red-100 text-red-700' 
-                              : 'bg-blue-100 text-blue-700'
-                          }`}>
-                            {files.experience.type === 'application/pdf' ? 'PDF' : 'IMAGE'}
-                          </span>
-                          <span className="truncate max-w-40">{files.experience.name}</span>
-                        </span>
-                      ) : 'Click to upload or drag and drop'}
+                      {files.experience ? files.experience.name : 'Click to upload or drag and drop'}
                     </p>
-                    <p className="text-xs text-slate-500 mt-1">PDF, JPG, PNG up to 10MB</p>
+                    <p className="text-xs text-slate-500 mt-1">PDF, JPG, PNG up to 5MB</p>
                   </div>
                 </div>
               </div>

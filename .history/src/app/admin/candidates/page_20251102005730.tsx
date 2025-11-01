@@ -42,50 +42,6 @@ export default function CandidatesPage() {
     }
   };
 
-  const handleDownload = async (url: string, filename: string, docType: 'passport' | 'experience') => {
-    try {
-      setDownloading(docType);
-      
-      // Fetch the file
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Download failed');
-      
-      // Get the blob
-      const blob = await response.blob();
-      
-      // Determine file extension from URL or content type
-      const urlParts = url.split('.');
-      const urlExtension = urlParts[urlParts.length - 1].split('?')[0]; // Remove query params
-      const contentType = response.headers.get('content-type');
-      
-      let extension = 'pdf'; // Default
-      if (contentType?.includes('pdf')) {
-        extension = 'pdf';
-      } else if (contentType?.includes('image') || ['jpg', 'jpeg', 'png', 'webp'].includes(urlExtension)) {
-        extension = urlExtension || 'jpg';
-      }
-      
-      // Create download link
-      const downloadUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = `${filename}_${docType}.${extension}`;
-      
-      // Trigger download
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Cleanup
-      window.URL.revokeObjectURL(downloadUrl);
-    } catch (error) {
-      console.error('Download error:', error);
-      alert('Failed to download file. Please try again.');
-    } finally {
-      setDownloading(null);
-    }
-  };
-
   const handleStatusChange = async (id: number, newStatus: string) => {
     try {
       const response = await fetch('/api/candidates', {
@@ -174,7 +130,6 @@ export default function CandidatesPage() {
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Name</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Email</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Area</th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-900">Documents</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Date</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Status</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Actions</th>
@@ -191,42 +146,6 @@ export default function CandidatesPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">{submission.email}</td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">{submission.areaOfInterest}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleDownload(
-                            submission.passportUrl,
-                            `${submission.firstName}_${submission.lastName}`,
-                            'passport'
-                          )}
-                          disabled={downloading === 'passport'}
-                          className="text-blue-600 hover:text-blue-800 disabled:text-blue-300 text-xs flex items-center gap-1"
-                          title="Download Passport"
-                        >
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                          📄
-                        </button>
-                        {submission.experienceCertificateUrl && (
-                          <button
-                            onClick={() => handleDownload(
-                              submission.experienceCertificateUrl!,
-                              `${submission.firstName}_${submission.lastName}`,
-                              'experience'
-                            )}
-                            disabled={downloading === 'experience'}
-                            className="text-green-600 hover:text-green-800 disabled:text-green-300 text-xs flex items-center gap-1"
-                            title="Download Experience Certificate"
-                          >
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            🎓
-                          </button>
-                        )}
-                      </div>
-                    </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {new Date(submission.createdAt).toLocaleDateString()}
                     </td>
@@ -269,7 +188,7 @@ export default function CandidatesPage() {
       {/* Detail Modal */}
       {selectedSubmission && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
                 {selectedSubmission.firstName} {selectedSubmission.lastName}
@@ -301,84 +220,23 @@ export default function CandidatesPage() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-600">Documents</p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-3">
-                  <button
-                    onClick={() => handleDownload(
-                      selectedSubmission.passportUrl,
-                      `${selectedSubmission.firstName}_${selectedSubmission.lastName}`,
-                      'passport'
-                    )}
-                    disabled={downloading === 'passport'}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-blue-300 transition text-sm font-medium"
-                  >
-                    {downloading === 'passport' ? (
-                      <>
-                        <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
-                        Downloading...
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Download Passport
-                      </>
-                    )}
-                  </button>
-                  
-                  {selectedSubmission.experienceCertificateUrl && (
-                    <button
-                      onClick={() => handleDownload(
-                        selectedSubmission.experienceCertificateUrl!,
-                        `${selectedSubmission.firstName}_${selectedSubmission.lastName}`,
-                        'experience'
-                      )}
-                      disabled={downloading === 'experience'}
-                      className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-green-300 transition text-sm font-medium"
-                    >
-                      {downloading === 'experience' ? (
-                        <>
-                          <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
-                          Downloading...
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                          Download Experience Certificate
-                        </>
-                      )}
-                    </button>
-                  )}
-                </div>
-                
-                {/* Preview Links */}
-                <div className="flex gap-3 mt-2">
+                <div className="flex gap-2 mt-2">
                   <a
                     href={selectedSubmission.passportUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline text-xs flex items-center gap-1"
+                    className="text-blue-600 hover:underline text-sm"
                   >
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    Preview Passport
+                    📄 Passport
                   </a>
                   {selectedSubmission.experienceCertificateUrl && (
                     <a
                       href={selectedSubmission.experienceCertificateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-600 hover:underline text-xs flex items-center gap-1"
+                      className="text-blue-600 hover:underline text-sm"
                     >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      Preview Experience
+                      🎓 Experience
                     </a>
                   )}
                 </div>

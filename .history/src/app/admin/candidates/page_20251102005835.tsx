@@ -269,7 +269,7 @@ export default function CandidatesPage() {
       {/* Detail Modal */}
       {selectedSubmission && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
                 {selectedSubmission.firstName} {selectedSubmission.lastName}

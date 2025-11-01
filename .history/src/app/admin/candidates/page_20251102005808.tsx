@@ -174,7 +174,6 @@ export default function CandidatesPage() {
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Name</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Email</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Area</th>
-                  <th className="px-6 py-4 text-left font-semibold text-gray-900">Documents</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Date</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Status</th>
                   <th className="px-6 py-4 text-left font-semibold text-gray-900">Actions</th>
@@ -191,42 +190,6 @@ export default function CandidatesPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">{submission.email}</td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">{submission.areaOfInterest}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleDownload(
-                            submission.passportUrl,
-                            `${submission.firstName}_${submission.lastName}`,
-                            'passport'
-                          )}
-                          disabled={downloading === 'passport'}
-                          className="text-blue-600 hover:text-blue-800 disabled:text-blue-300 text-xs flex items-center gap-1"
-                          title="Download Passport"
-                        >
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                          📄
-                        </button>
-                        {submission.experienceCertificateUrl && (
-                          <button
-                            onClick={() => handleDownload(
-                              submission.experienceCertificateUrl!,
-                              `${submission.firstName}_${submission.lastName}`,
-                              'experience'
-                            )}
-                            disabled={downloading === 'experience'}
-                            className="text-green-600 hover:text-green-800 disabled:text-green-300 text-xs flex items-center gap-1"
-                            title="Download Experience Certificate"
-                          >
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            🎓
-                          </button>
-                        )}
-                      </div>
-                    </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {new Date(submission.createdAt).toLocaleDateString()}
                     </td>
@@ -269,7 +232,7 @@ export default function CandidatesPage() {
       {/* Detail Modal */}
       {selectedSubmission && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
                 {selectedSubmission.firstName} {selectedSubmission.lastName}
