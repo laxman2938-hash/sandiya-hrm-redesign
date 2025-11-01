@@ -91,12 +91,12 @@ export default function CandidatesPage() {
       setLoading(true);
       setMessage(null);
 
-      // Upload files to Cloudinary
-      const passportUrl = await uploadToCloudinary(files.passport);
+      // Upload files to Supabase Storage
+      const passportUrl = await uploadToSupabase(files.passport);
       let experienceCertificateUrl = '';
 
       if (files.experience) {
-        experienceCertificateUrl = await uploadToCloudinary(files.experience);
+        experienceCertificateUrl = await uploadToSupabase(files.experience);
       }
 
       // Submit form with file URLs

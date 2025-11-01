@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const folder = formData.get('folder') as string || 'general';
+    const filePath = formData.get('filePath') as string;
 
     if (!file) {
       return NextResponse.json(
@@ -40,68 +40,53 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
+    if (!filePath) {
       return NextResponse.json(
-        { success: false, message: 'Only image files are allowed' },
+        { success: false, message: 'No file path provided' },
         { status: 400 }
       );
     }
 
-    // Validate file size (max 10MB for Cloudinary free tier)
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json(
-        { success: false, message: 'File size must be less than 10MB' },
-        { status: 400 }
-      );
-    }
+    // Initialize Supabase client
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Convert File to Buffer
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Generate unique public ID
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substring(7);
-    const publicId = `${folder}/${timestamp}_${random}`;
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from('sandiya-hr')
+      .upload(filePath, buffer, {
+        contentType: file.type,
+        upsert: false,
+      });
 
-    // Convert buffer to stream and upload to Cloudinary
-    const uploadPromise = new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          resource_type: 'image',
-          public_id: publicId,
-          folder: `sandiya-hr/${folder}`,
-          transformation: [
-            { quality: 'auto' },
-            { fetch_format: 'auto' }
-          ]
-        },
-        (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-          }
-        }
+    if (error) {
+      console.error('❌ Supabase upload error:', error);
+      return NextResponse.json(
+        { success: false, message: `Upload failed: ${error.message}` },
+        { status: 500 }
       );
-      uploadStream.end(buffer);
-    });
+    }
 
-    const result: any = await uploadPromise;
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from('sandiya-hr')
+      .getPublicUrl(filePath);
 
-    console.log('✅ File uploaded to Cloudinary:', result.secure_url);
+    console.log('✅ File uploaded to Supabase:', publicUrlData.publicUrl);
 
     return NextResponse.json({
       success: true,
-      url: result.secure_url,
-      public_id: result.public_id,
+      url: publicUrlData.publicUrl,
+      path: filePath,
     });
   } catch (error) {
-    console.error('❌ Cloudinary upload API error:', error);
+    console.error('❌ Upload API error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, message: `Upload failed: ${errorMessage}` },
+      { success: false, message: `Server error: ${errorMessage}` },
       { status: 500 }
     );
   }

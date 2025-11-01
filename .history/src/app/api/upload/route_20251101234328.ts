@@ -65,7 +65,27 @@ export async function POST(request: NextRequest) {
     const random = Math.random().toString(36).substring(7);
     const publicId = `${folder}/${timestamp}_${random}`;
 
-    // Convert buffer to stream and upload to Cloudinary
+    // Upload to Cloudinary
+    const uploadResult = await cloudinary.uploader.upload_stream(
+      {
+        resource_type: 'image',
+        public_id: publicId,
+        folder: `sandiya-hr/${folder}`,
+        transformation: [
+          { quality: 'auto' },
+          { fetch_format: 'auto' }
+        ]
+      },
+      (error, result) => {
+        if (error) {
+          console.error('❌ Cloudinary upload error:', error);
+          throw error;
+        }
+        return result;
+      }
+    );
+
+    // Convert buffer to stream and upload
     const uploadPromise = new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
@@ -98,10 +118,10 @@ export async function POST(request: NextRequest) {
       public_id: result.public_id,
     });
   } catch (error) {
-    console.error('❌ Cloudinary upload API error:', error);
+    console.error('❌ Upload API error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { success: false, message: `Upload failed: ${errorMessage}` },
+      { success: false, message: `Server error: ${errorMessage}` },
       { status: 500 }
     );
   }
