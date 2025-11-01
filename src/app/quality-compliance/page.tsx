@@ -5,7 +5,7 @@ export default function QualityCompliancePage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 to-indigo-900 text-white py-20 px-4">
+      <section className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">Quality Compliance</h1>
         </div>
@@ -61,7 +61,7 @@ export default function QualityCompliancePage() {
       </section>
 
       {/* Responsible Recruitment */}
-      <section className="py-16 px-4 bg-linear-to-b from-slate-50 to-white">
+      <section className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-blue-600">Responsible Recruitment</h2>
           

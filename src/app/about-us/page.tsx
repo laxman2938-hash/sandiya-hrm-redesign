@@ -42,7 +42,7 @@ export default function AboutUsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 via-indigo-900 to-slate-900 text-white py-20 px-4">
+      <section className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">About Us</h1>
           <p className="text-xl text-blue-100">We believe investing in people is our strength and asset.</p>
@@ -66,7 +66,7 @@ export default function AboutUsPage() {
                 Many of our team members have been with us since the company's inception—a testament to the positive work environment and values fostered by our leadership.
               </p>
             </div>
-            <div className="bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl overflow-hidden shadow-2xl h-96 flex items-center justify-center">
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl overflow-hidden shadow-2xl h-96 flex items-center justify-center">
               <div className="text-center text-white">
                 <div className="text-7xl mb-4">🌍</div>
                 <p className="text-2xl font-bold">Connecting Global Talent</p>
@@ -110,9 +110,9 @@ export default function AboutUsPage() {
               {teamMembers.map((member, idx) => (
                 <div
                   key={member.id}
-                  className="bg-linear-to-br from-slate-50 to-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8 hover:shadow-lg transition transform hover:-translate-y-2 text-center w-full"
+                  className="bg-gradient-to-br from-slate-50 to-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8 hover:shadow-lg transition transform hover:-translate-y-2 text-center w-full"
                 >
-                  <div className="w-24 h-24 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mx-auto mb-6 flex items-center justify-center overflow-hidden">
                     {member.image ? (
                       <Image 
                         src={member.image} 
@@ -164,7 +164,7 @@ export default function AboutUsPage() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">Community</h2>
           </div>
 
-          <div className="bg-linear-to-br from-slate-50 to-blue-50 border-2 border-blue-100 rounded-2xl p-8 md:p-12">
+          <div className="bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-blue-100 rounded-2xl p-8 md:p-12">
             <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
               Through our philanthropic initiatives, we strive to empower communities and create a meaningful, positive impact. Our internally driven and community-focused campaigns reflect our commitment to being a socially responsible organization.
             </p>

@@ -66,10 +66,10 @@ export default function AchievementsPage() {
   );
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-white via-blue-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
       <style>{animationStyles}</style>
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl"></div>
         </div>
@@ -100,7 +100,7 @@ export default function AchievementsPage() {
                   style={{ animation: `slideInUp 0.5s ease-out ${idx * 0.05}s forwards`, opacity: 0 }}
                   onClick={() => setSelectedImage({ url: achievement.image, title: achievement.title })}
                 >
-                  <div className="aspect-square bg-linear-to-br from-blue-200 to-blue-300 relative overflow-hidden">
+                  <div className="aspect-square bg-gradient-to-br from-blue-200 to-blue-300 relative overflow-hidden">
                     {achievement.image ? (
                       <img
                         src={achievement.image}
@@ -113,7 +113,7 @@ export default function AchievementsPage() {
                         }}
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-blue-100 to-blue-200">
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
                         <div className="text-6xl md:text-7xl">🏆</div>
                       </div>
                     )}

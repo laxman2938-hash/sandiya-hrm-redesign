@@ -44,7 +44,7 @@ export default function EmploymentCategoriesPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section - Minimal */}
-      <section className="bg-linear-to-r from-blue-900 to-indigo-900 text-white py-16 md:py-28 px-4">
+      <section className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16 md:py-28 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Employment Categories</h1>
           <p className="text-base md:text-lg text-blue-100 max-w-2xl mx-auto">
@@ -67,7 +67,7 @@ export default function EmploymentCategoriesPage() {
                 }}
               >
                 {/* Category Header */}
-                <div className={`bg-linear-to-br ${category.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition`}>
+                <div className={`bg-gradient-to-br ${category.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition`}>
                   <span className="text-3xl text-white">
                     {category.id === 1 && '👔'}
                     {category.id === 2 && '📋'}
@@ -90,7 +90,7 @@ export default function EmploymentCategoriesPage() {
       </section>
 
       {/* Details Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-b from-slate-50 to-white">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-slate-900">Choose What Works For You</h2>
           <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto text-justify">
@@ -100,7 +100,7 @@ export default function EmploymentCategoriesPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ animation: 'slideInUp 0.8s ease-out forwards' }}>
             {employmentCategories.map((category) => (
               <div key={category.id} className="flex gap-4">
-                <div className={`bg-linear-to-br ${category.color} w-12 h-12 rounded-lg flex items-center justify-center shrink-0`}>
+                <div className={`bg-gradient-to-br ${category.color} w-12 h-12 rounded-lg flex items-center justify-center shrink-0`}>
                   <span className="text-2xl text-white">
                     {category.id === 1 && '✓'}
                     {category.id === 2 && '✓'}
@@ -121,7 +121,7 @@ export default function EmploymentCategoriesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-r from-blue-900 to-indigo-900 text-white">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Find Your Perfect Role?</h2>
           <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">

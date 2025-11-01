@@ -65,9 +65,9 @@ export default function GalleryPage() {
   );
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-white via-blue-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400 rounded-full filter blur-3xl"></div>
@@ -88,7 +88,7 @@ export default function GalleryPage() {
       </section>
 
       {/* No Forced Bonded Labor Section */}
-      <section className="py-12 md:py-20 px-4 bg-linear-to-r from-green-50 via-emerald-50 to-green-50 border-y-2 border-green-200">
+      <section className="py-12 md:py-20 px-4 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 border-y-2 border-green-200">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left: Content */}
@@ -126,7 +126,7 @@ export default function GalleryPage() {
 
               <Link
                 href="/policy"
-                className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-lg transition transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-lg transition transform hover:scale-105"
               >
                 <span>Read Our Policy</span>
                 <span>→</span>
@@ -136,7 +136,7 @@ export default function GalleryPage() {
             {/* Right: Visual Badge */}
             <div className="order-1 md:order-2 flex justify-center items-center">
               <div className="relative w-full max-w-sm">
-                <div className="absolute inset-0 bg-linear-to-br from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-30"></div>
                 <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-green-200 text-center">
                   <div className="text-7xl md:text-8xl mb-4">🌍</div>
                   <h3 className="text-2xl md:text-3xl font-bold text-green-900 mb-4">Ethical Recruitment</h3>
@@ -179,7 +179,7 @@ export default function GalleryPage() {
               { number: '0', label: 'Forced Labor Cases', icon: '🚫' },
               { number: '50+', label: 'Countries Served', icon: '🌍' },
             ].map((stat, idx) => (
-              <div key={idx} className="text-center p-6 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-lg transition">
+              <div key={idx} className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-lg transition">
                 <div className="text-5xl mb-3">{stat.icon}</div>
                 <p className="text-3xl md:text-4xl font-bold text-green-700 mb-2">{stat.number}</p>
                 <p className="text-slate-700 font-semibold">{stat.label}</p>
@@ -201,7 +201,7 @@ export default function GalleryPage() {
                   className="group relative overflow-hidden rounded-lg md:rounded-2xl cursor-pointer shadow-md hover:shadow-2xl transition transform hover:scale-105"
                   style={{ animation: `slideInUp 0.5s ease-out ${idx * 0.05}s forwards`, opacity: 0 }}
                 >
-                  <div className="aspect-square bg-linear-to-br from-blue-200 to-blue-300">
+                  <div className="aspect-square bg-gradient-to-br from-blue-200 to-blue-300">
                     <img
                       src={image.image}
                       alt={image.title}

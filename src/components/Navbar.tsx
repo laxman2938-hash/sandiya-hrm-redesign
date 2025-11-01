@@ -62,7 +62,7 @@ export default function Navbar() {
                 >
                   {item.label}
                   {item.submenu && <span className="text-xs transform group-hover:rotate-180 transition-transform duration-300">▾</span>}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
                 
                 {/* Submenu */}
@@ -88,10 +88,10 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="hidden sm:inline-block px-4 sm:px-6 py-2 bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 relative overflow-hidden group text-sm sm:text-base"
+              className="hidden sm:inline-block px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 relative overflow-hidden group text-sm sm:text-base"
             >
               <span className="relative z-10">Contact Us</span>
-              <span className="absolute inset-0 bg-linear-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>
 
             {/* Mobile Menu Button */}
@@ -147,7 +147,7 @@ export default function Navbar() {
             <div className="flex gap-2 px-3 sm:px-4 pt-3 sm:pt-4 border-t border-slate-200">
               <Link
                 href="/contact"
-                className="flex-1 px-3 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-center transition-all duration-300 transform hover:scale-105 active:scale-95"
+                className="flex-1 px-3 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-center transition-all duration-300 transform hover:scale-105 active:scale-95"
                 onClick={() => setIsOpen(false)}
               >
                 Contact Us

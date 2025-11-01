@@ -51,7 +51,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-linear-to-r from-slate-950 to-blue-950 rounded-lg shadow-md p-6 text-white mb-8">
+      <div className="bg-gradient-to-r from-slate-950 to-blue-950 rounded-lg shadow-md p-6 text-white mb-8">
         <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
         <p className="text-slate-200">Manage all your submissions, feedback, and inquiries</p>
       </div>

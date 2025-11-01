@@ -223,7 +223,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section - Separate Below Hero */}
-      <section className="py-8 md:py-16 px-4 bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      <section className="py-8 md:py-16 px-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
         {/* Background Gradient Orbs */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
@@ -247,14 +247,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left - Image Section */}
             <div className="relative group animate-fade-in-up" style={{ animationDelay: '0s' }}>
-              <div className="absolute inset-0 bg-linear-to-br from-blue-600 to-indigo-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition duration-300"></div>
               <div className="relative h-96 md:h-full md:min-h-96 rounded-3xl overflow-hidden border-2 border-blue-100 shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=800&fit=crop"
                   alt="Our Story"
                   className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               </div>
             </div>
 
@@ -278,7 +278,7 @@ export default function Home() {
                   { number: '10K+', label: 'Placements' },
                   { number: '50+', label: 'Countries' },
                 ].map((stat, idx) => (
-                  <div key={idx} className="bg-linear-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-100 hover:border-blue-300 transition group/stat">
+                  <div key={idx} className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-100 hover:border-blue-300 transition group/stat">
                     <p className="text-2xl md:text-3xl font-bold text-blue-600 group-hover/stat:text-blue-700">{stat.number}</p>
                     <p className="text-xs md:text-sm text-slate-600 group-hover/stat:text-slate-700">{stat.label}</p>
                   </div>
@@ -287,7 +287,7 @@ export default function Home() {
 
               <Link
                 href="/about-us"
-                className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition transform hover:scale-105 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-blue-600/50 transition transform hover:scale-105 hover:-translate-y-0.5"
               >
                 <span>Read Our Full Story</span>
                 <span className="transform group-hover:translate-x-2 transition">→</span>
@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Advanced Grid */}
-      <section className="py-12 md:py-24 px-4 bg-linear-to-b from-white to-blue-50">
+      <section className="py-12 md:py-24 px-4 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <span className="inline-block text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-2 md:mb-4">Our Advantages</span>
@@ -317,8 +317,8 @@ export default function Home() {
                 className="group relative h-full"
                 style={{ animation: `slideInUp 0.6s ease-out ${idx * 0.1}s forwards`, opacity: 0 }}
               >
-                <div className="absolute inset-0 bg-linear-to-br from-slate-100 to-slate-50 rounded-2xl group-hover:opacity-0 transition duration-300"></div>
-                <div className={`absolute inset-0 bg-linear-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition duration-300`}></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl group-hover:opacity-0 transition duration-300"></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition duration-300`}></div>
                 
                 <div className="relative p-5 sm:p-6 md:p-8 rounded-2xl border border-slate-200 group-hover:border-transparent transition h-full flex flex-col">
                   <div className="text-3xl sm:text-4xl md:text-5xl mb-3 md:mb-4 transform group-hover:scale-125 transition">{feature.icon}</div>
@@ -332,7 +332,7 @@ export default function Home() {
       </section>
 
       {/* Working Hours Section - Premium Design */}
-      <section className="py-12 md:py-24 px-4 bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
+      <section className="py-12 md:py-24 px-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>

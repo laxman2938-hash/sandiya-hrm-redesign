@@ -149,7 +149,7 @@ export default function FeedbackAdminPage() {
             <p className="text-gray-600 mt-1">Total submissions: {feedbacks.length}</p>
           </div>
 
-          <div className="inline-block bg-linear-to-r from-red-100 to-red-50 p-3 rounded-lg border border-red-200">
+          <div className="inline-block bg-gradient-to-r from-red-100 to-red-50 p-3 rounded-lg border border-red-200">
             <p className="text-sm font-semibold text-red-800">
               🚨 Urgent: {feedbacks.filter((f) => f.priority === 'urgent').length}
             </p>

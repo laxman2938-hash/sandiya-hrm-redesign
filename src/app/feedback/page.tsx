@@ -88,7 +88,7 @@ export default function FeedbackPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-950 via-indigo-950 to-slate-950 text-white py-12 md:py-20 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-950 text-white py-12 md:py-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-400 rounded-full filter blur-3xl"></div>
@@ -107,7 +107,7 @@ export default function FeedbackPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 md:py-24 px-4 bg-linear-to-b from-white to-blue-50">
+      <section className="py-12 md:py-24 px-4 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
             {/* Info Cards */}
@@ -137,13 +137,13 @@ export default function FeedbackPage() {
           </div>
 
           {/* Feedback Form */}
-          <div className="bg-linear-to-br from-white to-blue-50 p-6 sm:p-8 md:p-12 rounded-2xl shadow-lg md:shadow-xl border border-blue-200">
+          <div className="bg-gradient-to-br from-white to-blue-50 p-6 sm:p-8 md:p-12 rounded-2xl shadow-lg md:shadow-xl border border-blue-200">
             {message && (
               <div
                 className={`p-6 rounded-2xl mb-8 text-lg font-semibold animate-pulse ${
                   message.type === 'success'
-                    ? 'bg-linear-to-r from-green-100 to-emerald-100 text-green-800 border-2 border-green-300'
-                    : 'bg-linear-to-r from-red-100 to-pink-100 text-red-800 border-2 border-red-300'
+                    ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-2 border-green-300'
+                    : 'bg-gradient-to-r from-red-100 to-pink-100 text-red-800 border-2 border-red-300'
                 }`}
               >
                 {message.type === 'success' ? '✓ ' : '✗ '}{message.text}
@@ -279,7 +279,7 @@ export default function FeedbackPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-bold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-400 transition transform hover:scale-105 active:scale-95 shadow-lg"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-bold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-400 transition transform hover:scale-105 active:scale-95 shadow-lg"
               >
                 {loading ? 'Submitting...' : 'Submit Feedback'}
               </button>
@@ -331,7 +331,7 @@ export default function FeedbackPage() {
               <p className="text-xs text-slate-600 mt-3">Quick response</p>
             </div>
 
-            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 shadow-md text-center">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 shadow-md text-center">
               <div className="text-4xl mb-3">📍</div>
               <h3 className="font-bold text-slate-900 mb-1">Visit Us</h3>
               <p className="text-blue-600 font-semibold mb-2">Dhumbarahi, Kathmandu</p>

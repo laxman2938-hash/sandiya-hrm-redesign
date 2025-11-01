@@ -142,7 +142,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-b from-white via-blue-50 to-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-white via-blue-50 to-white`}
       >
         <Navbar />
         {children}

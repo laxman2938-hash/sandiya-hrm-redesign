@@ -59,9 +59,9 @@ export default function ClientsPage() {
   );
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-white via-blue-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-900 text-white py-12 md:py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl"></div>
         </div>
@@ -91,7 +91,7 @@ export default function ClientsPage() {
                   className="group"
                   style={{ animation: `slideInUp 0.6s ease-out ${idx * 0.05}s forwards`, opacity: 0 }}
                 >
-                  <div className="bg-linear-to-br from-slate-50 to-blue-50 border border-blue-100 rounded-lg md:rounded-2xl p-3 md:p-6 hover:shadow-lg transition transform hover:-translate-y-2 hover:border-blue-300 h-full flex flex-col items-center justify-center">
+                  <div className="bg-gradient-to-br from-slate-50 to-blue-50 border border-blue-100 rounded-lg md:rounded-2xl p-3 md:p-6 hover:shadow-lg transition transform hover:-translate-y-2 hover:border-blue-300 h-full flex flex-col items-center justify-center">
                     <div className="w-full h-16 md:h-24 flex items-center justify-center mb-2 md:mb-4">
                       <img
                         src={client.logo}
@@ -120,7 +120,7 @@ export default function ClientsPage() {
       </section>
 
       {/* About Partnership Section */}
-      <section className="py-12 md:py-24 px-4 bg-linear-to-b from-blue-50 to-white">
+      <section className="py-12 md:py-24 px-4 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -142,7 +142,7 @@ export default function ClientsPage() {
                 ))}
               </div>
             </div>
-            <div className="order-1 md:order-2 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl md:rounded-2xl p-8 md:p-12 text-white text-center h-64 md:h-96 flex items-center justify-center">
+            <div className="order-1 md:order-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl md:rounded-2xl p-8 md:p-12 text-white text-center h-64 md:h-96 flex items-center justify-center">
               <div>
                 <div className="text-5xl md:text-7xl mb-3 md:mb-4">🤝</div>
                 <p className="text-lg md:text-2xl font-bold">Building Long-term Relationships</p>

@@ -55,7 +55,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
@@ -91,7 +91,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-slate-700 hover:bg-linear-to-br hover:from-blue-500 hover:to-indigo-600 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                    className="w-10 h-10 bg-slate-700 hover:bg-gradient-to-br hover:from-blue-500 hover:to-indigo-600 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -162,12 +162,12 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="bg-linear-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-lg p-4 mt-6">
+              <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-lg p-4 mt-6">
                 <p className="text-xs text-blue-300 font-semibold mb-1">WORKING HOURS</p>
                 <p className="text-sm font-bold text-white">Sun - Fri: 10:00 AM - 6:00 PM</p>
               </div>
 
-              <div className="bg-linear-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-lg p-4 mt-4">
+              <div className="bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-lg p-4 mt-4">
                 <p className="text-xs text-green-300 font-semibold mb-3">WHATSAPP US</p>
                 <div className="flex flex-col gap-2">
                   <a 
@@ -222,7 +222,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Banner */}
-      <div className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-600 py-4">
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 py-4">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-white text-sm font-semibold">
             ✨ Connecting Talent with Opportunity Worldwide ✨

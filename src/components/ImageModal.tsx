@@ -58,7 +58,7 @@ export default function ImageModal({ isOpen, onClose, imageUrl, title, descripti
       {/* Modal Content */}
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-[95vw] max-h-[95vh] overflow-hidden animate-modal-in">
         {/* Minimal Header */}
-        <div className="flex items-center justify-end p-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white">          
+        <div className="flex items-center justify-end p-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">          
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
             <button
